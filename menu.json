@@ -1,0 +1,354 @@
+{
+  "_가이드": "이 파일을 수정하면 사이드바 메뉴가 바뀝니다. label=메뉴이름, file=연결된 md파일(content 폴더 안), items=하위 항목, tabs=페이지 안에서 전환되는 탭(기본정보/예약하기/취소하기/요금마감 등). 새 항목 추가시 콤마(,) 빠뜨리지 않게 주의하세요. 항목 순서 = 사이드바에 보이는 순서입니다.",
+
+  "categories": [
+    {
+      "id": "basic",
+      "label": "기초/입문",
+      "color": "#7F77DD",
+      "items": [
+        { "title": "사회생활 기본", "file": "content/basic-social.md" },
+        { "title": "컴퓨터 기본", "file": "content/basic-computer.md" },
+        {
+          "title": "프로그램 기본",
+          "items": [
+            {
+              "title": "고마스터",
+              "tabs": [
+                { "title": "예약조회", "file": "content/basic-gomaster-search.md" },
+                { "title": "예약(관리자추천)", "file": "content/basic-gomaster-recommend.md" }
+              ]
+            },
+            {
+              "title": "윙스",
+              "tabs": [
+                { "title": "예약조회", "file": "content/basic-wings-search.md" },
+                { "title": "객실수량확인", "file": "content/basic-wings-roomcount.md" },
+                { "title": "예약하기", "file": "content/basic-wings-reserve.md" },
+                { "title": "서비스코드등록", "file": "content/basic-wings-servicecode.md" }
+              ]
+            },
+            {
+              "title": "예약취소",
+              "tabs": [
+                { "title": "취소기준", "file": "content/basic-cancel-criteria.md" },
+                { "title": "연동취소", "file": "content/basic-cancel-linked.md" },
+                { "title": "미연동취소", "file": "content/basic-cancel-unlinked.md" },
+                { "title": "결제취소", "file": "content/basic-cancel-payment.md" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ota",
+      "label": "OTA 업무메뉴얼",
+      "color": "#1D9E75",
+      "items": [
+        { "title": "공통 및 특이사항", "file": "content/ota-common.md" },
+        {
+          "title": "당일앱",
+          "items": [
+            {
+              "title": "야놀자",
+              "tabs": [
+                { "title": "기본정보", "file": "content/ota-dayapp-yanolja-info.md" },
+                { "title": "예약하기", "file": "content/ota-dayapp-yanolja-reserve.md" },
+                { "title": "취소하기", "file": "content/ota-dayapp-yanolja-cancel.md" },
+                { "title": "요금마감", "file": "content/ota-dayapp-yanolja-close.md" }
+              ]
+            },
+            {
+              "title": "여기어때",
+              "tabs": [
+                { "title": "기본정보", "file": "content/ota-dayapp-yeogi-info.md" },
+                { "title": "예약하기", "file": "content/ota-dayapp-yeogi-reserve.md" },
+                { "title": "취소하기", "file": "content/ota-dayapp-yeogi-cancel.md" },
+                { "title": "요금마감", "file": "content/ota-dayapp-yeogi-close.md" }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "소셜",
+          "items": [
+            {
+              "title": "온다",
+              "tabs": [
+                { "title": "기본정보", "file": "content/ota-social-onda-info.md" },
+                { "title": "예약하기", "file": "content/ota-social-onda-reserve.md" },
+                { "title": "취소하기", "file": "content/ota-social-onda-cancel.md" },
+                { "title": "요금마감", "file": "content/ota-social-onda-close.md" }
+              ]
+            },
+            {
+              "title": "쿠팡",
+              "tabs": [
+                { "title": "기본정보", "file": "content/ota-social-coupang-info.md" },
+                { "title": "예약하기", "file": "content/ota-social-coupang-reserve.md" },
+                { "title": "취소하기", "file": "content/ota-social-coupang-cancel.md" },
+                { "title": "요금마감", "file": "content/ota-social-coupang-close.md" }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "포털",
+          "items": [
+            {
+              "title": "네이버",
+              "tabs": [
+                { "title": "기본정보", "file": "content/ota-portal-naver-info.md" },
+                { "title": "예약하기", "file": "content/ota-portal-naver-reserve.md" },
+                { "title": "취소하기", "file": "content/ota-portal-naver-cancel.md" },
+                { "title": "요금마감", "file": "content/ota-portal-naver-close.md" }
+              ]
+            },
+            {
+              "title": "트립토파즈",
+              "tabs": [
+                { "title": "기본정보", "file": "content/ota-portal-tripotaz-info.md" },
+                { "title": "예약하기", "file": "content/ota-portal-tripotaz-reserve.md" },
+                { "title": "취소하기", "file": "content/ota-portal-tripotaz-cancel.md" },
+                { "title": "요금마감", "file": "content/ota-portal-tripotaz-close.md" }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "투어",
+          "items": [
+            {
+              "title": "웹투어",
+              "tabs": [
+                { "title": "기본정보", "file": "content/ota-tour-webtour-info.md" },
+                { "title": "예약하기", "file": "content/ota-tour-webtour-reserve.md" },
+                { "title": "취소하기", "file": "content/ota-tour-webtour-cancel.md" },
+                { "title": "요금마감", "file": "content/ota-tour-webtour-close.md" }
+              ]
+            },
+            {
+              "title": "타이드",
+              "tabs": [
+                { "title": "기본정보", "file": "content/ota-tour-tide-info.md" },
+                { "title": "예약하기", "file": "content/ota-tour-tide-reserve.md" },
+                { "title": "취소하기", "file": "content/ota-tour-tide-cancel.md" },
+                { "title": "요금마감", "file": "content/ota-tour-tide-close.md" }
+              ]
+            },
+            {
+              "title": "마이리얼트립",
+              "tabs": [
+                { "title": "기본정보", "file": "content/ota-tour-myrealtrip-info.md" },
+                { "title": "예약하기", "file": "content/ota-tour-myrealtrip-reserve.md" },
+                { "title": "취소하기", "file": "content/ota-tour-myrealtrip-cancel.md" },
+                { "title": "요금마감", "file": "content/ota-tour-myrealtrip-close.md" }
+              ]
+            },
+            {
+              "title": "올마이투어",
+              "tabs": [
+                { "title": "기본정보", "file": "content/ota-tour-allmytour-info.md" },
+                { "title": "예약하기", "file": "content/ota-tour-allmytour-reserve.md" },
+                { "title": "취소하기", "file": "content/ota-tour-allmytour-cancel.md" },
+                { "title": "요금마감", "file": "content/ota-tour-allmytour-close.md" }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "자사",
+          "tabs": [
+            { "title": "공통 및 특이사항", "file": "content/ota-direct-common.md" },
+            { "title": "기본정보", "file": "content/ota-direct-info.md" },
+            { "title": "예약하기", "file": "content/ota-direct-reserve.md" },
+            { "title": "취소하기", "file": "content/ota-direct-cancel.md" },
+            { "title": "요금마감", "file": "content/ota-direct-close.md" }
+          ]
+        },
+        {
+          "title": "해외",
+          "items": [
+            {
+              "title": "아고다",
+              "tabs": [
+                { "title": "기본정보", "file": "content/ota-overseas-agoda-info.md" },
+                { "title": "예약하기", "file": "content/ota-overseas-agoda-reserve.md" },
+                { "title": "취소하기", "file": "content/ota-overseas-agoda-cancel.md" },
+                { "title": "요금마감", "file": "content/ota-overseas-agoda-close.md" }
+              ]
+            },
+            {
+              "title": "익스피디아",
+              "tabs": [
+                { "title": "기본정보", "file": "content/ota-overseas-expedia-info.md" },
+                { "title": "예약하기", "file": "content/ota-overseas-expedia-reserve.md" },
+                { "title": "취소하기", "file": "content/ota-overseas-expedia-cancel.md" },
+                { "title": "요금마감", "file": "content/ota-overseas-expedia-close.md" }
+              ]
+            },
+            {
+              "title": "씨트립",
+              "tabs": [
+                { "title": "기본정보", "file": "content/ota-overseas-ctrip-info.md" },
+                { "title": "예약하기", "file": "content/ota-overseas-ctrip-reserve.md" },
+                { "title": "취소하기", "file": "content/ota-overseas-ctrip-cancel.md" },
+                { "title": "요금마감", "file": "content/ota-overseas-ctrip-close.md" }
+              ]
+            },
+            {
+              "title": "부킹닷컴",
+              "tabs": [
+                { "title": "기본정보", "file": "content/ota-overseas-booking-info.md" },
+                { "title": "예약하기", "file": "content/ota-overseas-booking-reserve.md" },
+                { "title": "취소하기", "file": "content/ota-overseas-booking-cancel.md" },
+                { "title": "요금마감", "file": "content/ota-overseas-booking-close.md" }
+              ]
+            },
+            {
+              "title": "호텔패스",
+              "tabs": [
+                { "title": "기본정보", "file": "content/ota-overseas-hotelpass-info.md" },
+                { "title": "예약하기", "file": "content/ota-overseas-hotelpass-reserve.md" },
+                { "title": "취소하기", "file": "content/ota-overseas-hotelpass-cancel.md" },
+                { "title": "요금마감", "file": "content/ota-overseas-hotelpass-close.md" }
+              ]
+            },
+            {
+              "title": "트립비토즈",
+              "tabs": [
+                { "title": "기본정보", "file": "content/ota-overseas-tripvitoz-info.md" },
+                { "title": "예약하기", "file": "content/ota-overseas-tripvitoz-reserve.md" },
+                { "title": "취소하기", "file": "content/ota-overseas-tripvitoz-cancel.md" },
+                { "title": "요금마감", "file": "content/ota-overseas-tripvitoz-close.md" }
+              ]
+            },
+            {
+              "title": "오마이호텔",
+              "tabs": [
+                { "title": "기본정보", "file": "content/ota-overseas-ohmyhotel-info.md" },
+                { "title": "예약하기", "file": "content/ota-overseas-ohmyhotel-reserve.md" },
+                { "title": "취소하기", "file": "content/ota-overseas-ohmyhotel-cancel.md" },
+                { "title": "요금마감", "file": "content/ota-overseas-ohmyhotel-close.md" }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "에어비앤비",
+          "tabs": [
+            { "title": "기본정보", "file": "content/ota-airbnb-info.md" },
+            { "title": "예약하기", "file": "content/ota-airbnb-reserve.md" },
+            { "title": "취소하기", "file": "content/ota-airbnb-cancel.md" },
+            { "title": "요금마감", "file": "content/ota-airbnb-close.md" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reserve",
+      "label": "리저브클럽",
+      "color": "#534AB7",
+      "items": [
+        { "title": "기본정보 및 특이사항", "file": "content/reserve-info.md" },
+        {
+          "title": "예약/취소/요금",
+          "tabs": [
+            { "title": "예약하기", "file": "content/reserve-reserve.md" },
+            { "title": "취소하기", "file": "content/reserve-cancel.md" },
+            { "title": "요금마감", "file": "content/reserve-close.md" }
+          ]
+        },
+        { "title": "이용방법", "file": "content/reserve-howto.md" },
+        { "title": "문의답변", "file": "content/reserve-qna.md" },
+        { "title": "카톡발송", "file": "content/reserve-kakao.md" },
+        { "title": "구매방법", "file": "content/reserve-purchase.md" },
+        { "title": "스마트스토어", "file": "content/reserve-smartstore.md" }
+      ]
+    },
+    {
+      "id": "homeshopping",
+      "label": "홈쇼핑",
+      "color": "#D4537E",
+      "items": [
+        { "title": "기본정보 및 특이사항", "file": "content/hs-info.md" },
+        {
+          "title": "예약/취소/요금",
+          "tabs": [
+            { "title": "예약하기", "file": "content/hs-reserve.md" },
+            { "title": "취소하기", "file": "content/hs-cancel.md" },
+            { "title": "요금마감", "file": "content/hs-close.md" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "facility",
+      "label": "시설정보",
+      "color": "#D85A30",
+      "items": [
+        { "title": "공통 및 특이사항", "file": "content/facility-common.md" },
+        {
+          "title": "아르누보",
+          "tabs": [
+            { "title": "기본정보", "file": "content/facility-arnouveau-info.md" },
+            { "title": "객실정보", "file": "content/facility-arnouveau-room.md" }
+          ]
+        },
+        {
+          "title": "스테이모어",
+          "tabs": [
+            { "title": "기본정보", "file": "content/facility-staymore-info.md" },
+            { "title": "객실정보", "file": "content/facility-staymore-room.md" }
+          ]
+        },
+        {
+          "title": "오션투유",
+          "tabs": [
+            { "title": "기본정보", "file": "content/facility-ocean2u-info.md" },
+            { "title": "객실정보", "file": "content/facility-ocean2u-room.md" }
+          ]
+        },
+        {
+          "title": "아이파크",
+          "tabs": [
+            { "title": "기본정보", "file": "content/facility-ipark-info.md" },
+            { "title": "객실정보", "file": "content/facility-ipark-room.md" }
+          ]
+        },
+        {
+          "title": "마리비스타",
+          "tabs": [
+            { "title": "기본정보", "file": "content/facility-maribista-info.md" },
+            { "title": "객실정보", "file": "content/facility-maribista-room.md" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cms",
+      "label": "CMS",
+      "color": "#3b82f6",
+      "items": [
+        { "title": "요금관리", "file": "content/cms-rate.md" },
+        { "title": "객실관리", "file": "content/cms-room.md" }
+      ]
+    },
+    {
+      "id": "etc",
+      "label": "기타",
+      "color": "#888780",
+      "items": [
+        {
+          "title": "리뷰",
+          "tabs": [
+            { "title": "공통 및 특이사항", "file": "content/etc-review-common.md" },
+            { "title": "구매", "file": "content/etc-review-purchase.md" }
+          ]
+        },
+        { "title": "대량등록", "file": "content/etc-bulk.md" }
+      ]
+    }
+  ]
+}

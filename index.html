@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>여행2팀 해적단 업무 매뉴얼</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+:root{
+  --bg:#f5f5f3;--bg-sidebar:#1a1a2e;--bg-sidebar-hover:#16213e;--bg-sidebar-active:#0f3460;
+  --accent:#2563eb;--accent-light:#eff6ff;--accent-text:#1d4ed8;
+  --text-primary:#111827;--text-secondary:#6b7280;--text-tertiary:#9ca3af;--border:#e5e7eb;
+  --warning-bg:#fffbeb;--warning-border:#fcd34d;--warning-text:#92400e;
+  --success-bg:#f0fdf4;--success-text:#166534;--danger-bg:#fef2f2;--danger-text:#991b1b;
+  --radius:8px;--font-scale:1;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:calc(14px * var(--font-scale))}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text-primary);display:flex;min-height:100vh;font-size:1rem}
+
+/* ===== 사이드바 ===== */
+.sidebar{width:260px;min-width:260px;background:var(--bg-sidebar);position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:100;display:flex;flex-direction:column}
+.sidebar-header{padding:20px 20px 14px;border-bottom:1px solid rgba(255,255,255,0.08)}
+.hotel-name{font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:3px}
+.doc-type{font-size:0.78rem;color:rgba(255,255,255,0.4)}
+.sidebar-search{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.08)}
+.sidebar-search input{width:100%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:7px 10px;font-size:0.8rem;color:#fff;font-family:'Noto Sans KR',sans-serif;outline:none}
+.sidebar-search input::placeholder{color:rgba(255,255,255,0.3)}
+.sidebar-search input:focus{border-color:var(--accent)}
+
+.sidebar-tabs{display:flex;border-bottom:1px solid rgba(255,255,255,0.08)}
+.sidebar-tab{flex:1;text-align:center;padding:8px 4px;font-size:0.72rem;color:rgba(255,255,255,0.4);cursor:pointer;letter-spacing:0.05em}
+.sidebar-tab.active{color:#fff;border-bottom:2px solid var(--accent)}
+.sidebar-panel{display:none}
+.sidebar-panel.active{display:block}
+
+.folder-header{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;font-size:0.72rem;color:rgba(255,255,255,0.55);cursor:pointer;letter-spacing:0.08em;text-transform:uppercase;user-select:none;transition:background 0.15s}
+.folder-header:hover{background:var(--bg-sidebar-hover)}
+.folder-header .folder-title{display:flex;align-items:center;gap:7px}
+.folder-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.folder-arrow{font-size:0.65rem;transition:transform 0.2s;color:rgba(255,255,255,0.3)}
+.folder.open .folder-arrow{transform:rotate(90deg)}
+.folder-items{display:none;padding:2px 0}
+.folder.open .folder-items{display:block}
+
+.subfolder-header{display:flex;align-items:center;justify-content:space-between;padding:7px 20px 7px 30px;font-size:0.78rem;color:rgba(255,255,255,0.45);cursor:pointer;user-select:none}
+.subfolder-header:hover{background:var(--bg-sidebar-hover)}
+.subfolder-arrow{font-size:0.6rem;transition:transform 0.2s;color:rgba(255,255,255,0.3)}
+.subfolder.open .subfolder-arrow{transform:rotate(90deg)}
+.subfolder-items{display:none;padding:2px 0}
+.subfolder.open .subfolder-items{display:block}
+
+.nav-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 20px 7px 30px;font-size:0.8rem;color:rgba(255,255,255,0.55);cursor:pointer;transition:all 0.15s;text-decoration:none;border-left:2px solid transparent}
+.nav-item.sub{padding-left:42px;font-size:0.76rem}
+.nav-item:hover{background:var(--bg-sidebar-hover);color:rgba(255,255,255,0.9)}
+.nav-item.active{background:var(--bg-sidebar-active);color:#fff;border-left:2px solid #60a5fa;font-weight:500}
+.nav-item .star{font-size:0.85rem;color:rgba(255,255,255,0.2);cursor:pointer;flex-shrink:0}
+.nav-item .star.filled{color:#fbbf24}
+.nav-item .star:hover{color:#fbbf24}
+
+.empty-msg{padding:20px;font-size:0.78rem;color:rgba(255,255,255,0.35);text-align:center}
+
+/* ===== 메인 ===== */
+.main{margin-left:260px;flex:1;padding:36px 40px;max-width:1000px}
+.topbar{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-bottom:16px}
+.tool-btn{background:#fff;border:1px solid var(--border);border-radius:6px;padding:6px 12px;font-size:0.78rem;color:var(--text-secondary);cursor:pointer;display:flex;align-items:center;gap:5px;font-family:'Noto Sans KR',sans-serif;transition:all 0.15s}
+.tool-btn:hover{border-color:var(--accent);color:var(--accent-text)}
+.font-ctrl{display:flex;align-items:center;gap:2px;background:#fff;border:1px solid var(--border);border-radius:6px;padding:2px}
+.font-ctrl button{border:none;background:none;width:26px;height:26px;border-radius:4px;cursor:pointer;font-size:0.8rem;color:var(--text-secondary)}
+.font-ctrl button:hover{background:var(--accent-light);color:var(--accent-text)}
+
+.breadcrumb{display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--text-tertiary);margin-bottom:20px}
+.page-title{font-size:1.55rem;font-weight:700;color:var(--text-primary);margin-bottom:14px}
+
+.page-tabs{display:flex;gap:4px;margin-bottom:24px;border-bottom:1px solid var(--border)}
+.page-tab{padding:9px 18px;font-size:0.85rem;color:var(--text-secondary);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.page-tab.active{color:var(--accent-text);border-bottom-color:var(--accent);font-weight:500}
+
+/* 목차 */
+.toc{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin-bottom:24px;font-size:0.8rem}
+.toc-title{font-weight:700;margin-bottom:8px;color:var(--text-primary)}
+.toc a{display:block;color:var(--text-secondary);text-decoration:none;padding:3px 0;cursor:pointer}
+.toc a:hover{color:var(--accent-text)}
+
+/* 본문 콘텐츠 */
+.content-body{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:28px 32px}
+.content-body h1{font-size:1.4rem;font-weight:700;margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.content-body h2{font-size:1.05rem;font-weight:700;margin:24px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.content-body h2:first-child{margin-top:0}
+.content-body h3{font-size:0.95rem;font-weight:700;margin:16px 0 8px}
+.content-body p{font-size:0.9rem;line-height:1.85;color:var(--text-secondary);margin-bottom:10px}
+.content-body strong{color:var(--text-primary);font-weight:700}
+.content-body ul,.content-body ol{margin:0 0 12px 1.4rem;font-size:0.9rem;line-height:1.85;color:var(--text-secondary)}
+.content-body img{max-width:100%;border-radius:6px;border:1px solid var(--border);margin:10px 0}
+.content-body table{width:100%;border-collapse:collapse;font-size:0.85rem;margin:12px 0;border:1px solid var(--border);overflow:hidden;border-radius:var(--radius)}
+.content-body th{background:#f9fafb;color:var(--text-secondary);padding:9px 14px;border-bottom:1px solid var(--border);font-weight:500;text-align:left}
+.content-body td{padding:9px 14px;border-bottom:1px solid var(--border)}
+.content-body tr:last-child td{border-bottom:none}
+.content-body tr:hover td{background:#f9fafb}
+.content-body blockquote{background:var(--warning-bg);border:1px solid var(--warning-border);border-radius:var(--radius);padding:12px 16px;margin:12px 0;font-size:0.85rem;color:var(--warning-text);line-height:1.7}
+.content-body blockquote p{color:var(--warning-text);margin:0}
+.content-body code{background:#f3f4f6;padding:2px 6px;border-radius:4px;font-size:0.85em}
+.content-body pre{position:relative}
+
+.copy-btn{position:absolute;top:6px;right:6px;background:#fff;border:1px solid var(--border);border-radius:4px;font-size:0.7rem;padding:3px 8px;cursor:pointer;color:var(--text-secondary)}
+.copy-btn:hover{color:var(--accent-text);border-color:var(--accent)}
+
+/* 홈 화면 */
+.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:8px}
+.home-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:18px;cursor:pointer;transition:all 0.15s}
+.home-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.home-card-dot{width:8px;height:8px;border-radius:50%;margin-bottom:12px}
+.home-card-title{font-size:0.95rem;font-weight:700;margin-bottom:4px}
+.home-card-count{font-size:0.78rem;color:var(--text-secondary)}
+
+.section-block{margin-bottom:24px}
+.section-block-title{font-size:0.85rem;font-weight:700;color:var(--text-secondary);margin-bottom:10px}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:#fff;border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:0.8rem;cursor:pointer;color:var(--text-secondary);display:flex;align-items:center;gap:6px}
+.chip:hover{border-color:var(--accent);color:var(--accent-text)}
+.chip .star{color:#fbbf24}
+
+.empty-content{text-align:center;padding:60px 20px;color:var(--text-tertiary)}
+.empty-content .big{font-size:2rem;margin-bottom:10px}
+
+/* 인쇄 */
+@media print{
+  .sidebar,.topbar,.toc{display:none !important}
+  .main{margin-left:0;max-width:none;padding:0}
+  .content-body{border:none;padding:0}
+  body{background:#fff}
+  @page{size:A4;margin:18mm}
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="hotel-name">여행2팀 해적단</div>
+    <div class="doc-type">업무 매뉴얼</div>
+  </div>
+  <div class="sidebar-search">
+    <input type="text" id="sidebarSearch" placeholder="빠른 이동...">
+  </div>
+  <div class="sidebar-tabs">
+    <div class="sidebar-tab active" data-panel="all">전체</div>
+    <div class="sidebar-tab" data-panel="favorites">즐겨찾기</div>
+    <div class="sidebar-tab" data-panel="recent">최근본항목</div>
+  </div>
+  <div class="sidebar-panel active" id="panel-all"></div>
+  <div class="sidebar-panel" id="panel-favorites"></div>
+  <div class="sidebar-panel" id="panel-recent"></div>
+</div>
+
+<div class="main">
+  <div class="topbar">
+    <div class="font-ctrl">
+      <button onclick="changeFont(-1)" title="글자 작게">A-</button>
+      <button onclick="changeFont(0)" title="기본 크기">A</button>
+      <button onclick="changeFont(1)" title="글자 크게">A+</button>
+    </div>
+    <button class="tool-btn" onclick="window.print()">🖨️ 인쇄/PDF</button>
+  </div>
+  <div id="page"></div>
+</div>
+
+<script>
+let MENU = null;
+let FLAT = []; // 검색용 평탄화 인덱스: {title, file, path:[breadcrumb], catColor}
+let currentFile = null;
+let currentTabs = null;
+let currentTabIndex = 0;
+let currentBreadcrumb = [];
+
+const FAVORITES_KEY = 'manual_favorites';
+const RECENT_KEY = 'manual_recent';
+let favorites = JSON.parse(localStorageGet(FAVORITES_KEY) || '[]');
+let recent = JSON.parse(localStorageGet(RECENT_KEY) || '[]');
+
+// localStorage 래퍼 (파일:// 환경 등 예외 대비)
+function localStorageGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function localStorageSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+
+// ===== menu.json 로드 =====
+fetch('menu.json')
+  .then(r => r.json())
+  .then(data => {
+    MENU = data;
+    buildFlatIndex();
+    renderSidebar();
+    renderHome();
+  })
+  .catch(err => {
+    document.getElementById('page').innerHTML =
+      '<div class="empty-content"><div class="big">⚠️</div><p>menu.json을 불러올 수 없습니다.<br>GitHub Pages에 올린 후 접속하면 정상 작동합니다.<br>(로컬에서 더블클릭으로 열면 보안정책상 작동하지 않습니다)</p></div>';
+  });
+
+// ===== 평탄화 인덱스 (검색용) =====
+function buildFlatIndex(){
+  FLAT = [];
+  MENU.categories.forEach(cat => {
+    walkItems(cat.items, [cat.label], cat.color);
+  });
+}
+function walkItems(items, path, color){
+  items.forEach(item => {
+    const newPath = [...path, item.title];
+    if(item.file){
+      FLAT.push({ title:item.title, file:item.file, path:newPath, color, type:'file' });
+    }
+    if(item.tabs){
+      FLAT.push({ title:item.title, tabs:item.tabs, path:newPath, color, type:'tabs' });
+    }
+    if(item.items){
+      walkItems(item.items, newPath, color);
+    }
+  });
+}
+
+// ===== 사이드바 렌더링 =====
+function renderSidebar(filter){
+  const panel = document.getElementById('panel-all');
+  panel.innerHTML = '';
+  MENU.categories.forEach((cat, ci) => {
+    const folder = document.createElement('div');
+    folder.className = 'folder';
+    folder.id = 'folder-' + ci;
+
+    const filtered = filter ? filterItems(cat.items, filter) : cat.items;
+    if(filter && filtered.length === 0) return;
+
+    const isOpen = !!filter;
+    if(isOpen) folder.classList.add('open');
+
+    const header = document.createElement('div');
+    header.className = 'folder-header';
+    header.innerHTML = `<span class="folder-title"><span class="folder-dot" style="background:${cat.color}"></span>${cat.label}</span><span class="folder-arrow">▶</span>`;
+    header.onclick = () => folder.classList.toggle('open');
+    folder.appendChild(header);
+
+    const itemsWrap = document.createElement('div');
+    itemsWrap.className = 'folder-items';
+    renderItemList(itemsWrap, filtered, [cat.label], cat.color, 0);
+    folder.appendChild(itemsWrap);
+
+    panel.appendChild(folder);
+  });
+  renderFavorites();
+  renderRecent();
+}
+
+function filterItems(items, filter){
+  const f = filter.toLowerCase();
+  const result = [];
+  items.forEach(item => {
+    let match = item.title.toLowerCase().includes(f);
+    let subItems = item.items ? filterItems(item.items, filter) : null;
+    let subTabs = item.tabs ? item.tabs.filter(t => t.title.toLowerCase().includes(f)) : null;
+    if(match || (subItems && subItems.length) || (subTabs && subTabs.length)){
+      const copy = Object.assign({}, item);
+      if(subItems) copy.items = subItems;
+      result.push(copy);
+    }
+  });
+  return result;
+}
+
+function renderItemList(container, items, path, color, depth){
+  items.forEach(item => {
+    const newPath = [...path, item.title];
+    if(item.items){
+      // 서브폴더
+      const sub = document.createElement('div');
+      sub.className = 'subfolder';
+      const sid = 'sf-' + Math.random().toString(36).slice(2,8);
+      sub.id = sid;
+      const header = document.createElement('div');
+      header.className = 'subfolder-header';
+      header.style.paddingLeft = (28 + depth*10) + 'px';
+      header.innerHTML = `<span>${item.title}</span><span class="subfolder-arrow">▶</span>`;
+      header.onclick = () => sub.classList.toggle('open');
+      sub.appendChild(header);
+      const subItems = document.createElement('div');
+      subItems.className = 'subfolder-items';
+      renderItemList(subItems, item.items, newPath, color, depth+1);
+      sub.appendChild(subItems);
+      container.appendChild(sub);
+    } else if(item.tabs){
+      // 탭이 있는 항목 -> 클릭시 첫 탭
+      const navItem = makeNavItem(item.title, newPath, color, () => openTabPage(item.title, item.tabs, newPath, color), depth);
+      container.appendChild(navItem);
+    } else if(item.file){
+      const navItem = makeNavItem(item.title, newPath, color, () => openFilePage(item.title, item.file, newPath, color), depth);
+      container.appendChild(navItem);
+    }
+  });
+}
+
+function makeNavItem(title, path, color, onClick, depth){
+  const el = document.createElement('div');
+  el.className = 'nav-item' + (depth > 0 ? ' sub' : '');
+  el.style.paddingLeft = (30 + depth*10) + 'px';
+  const key = path.join(' > ');
+  const isFav = favorites.includes(key);
+  el.innerHTML = `<span class="nav-title">${title}</span><span class="star ${isFav?'filled':''}">★</span>`;
+  el.querySelector('.nav-title').onclick = onClick;
+  el.querySelector('.star').onclick = (e) => { e.stopPropagation(); toggleFavorite(key, title, path, color, onClick); };
+  el.dataset.key = key;
+  return el;
+}
+
+// ===== 즐겨찾기 =====
+function toggleFavorite(key, title, path, color, onClick){
+  const idx = favorites.indexOf(key);
+  if(idx >= 0){ favorites.splice(idx,1); }
+  else { favorites.push(key); }
+  localStorageSet(FAVORITES_KEY, JSON.stringify(favorites));
+  // 갱신
+  document.querySelectorAll(`.nav-item[data-key="${CSS.escape(key)}"] .star`).forEach(s => s.classList.toggle('filled'));
+  renderFavorites();
+}
+
+function renderFavorites(){
+  const panel = document.getElementById('panel-favorites');
+  if(favorites.length === 0){
+    panel.innerHTML = '<div class="empty-msg">★ 버튼을 눌러 즐겨찾기에 추가하세요</div>';
+    return;
+  }
+  panel.innerHTML = '';
+  favorites.forEach(key => {
+    const found = findByKey(key);
+    if(!found) return;
+    const el = document.createElement('div');
+    el.className = 'nav-item';
+    el.innerHTML = `<span class="nav-title">${found.title}</span><span class="star filled">★</span>`;
+    el.querySelector('.nav-title').onclick = found.onClick;
+    el.querySelector('.star').onclick = (e) => { e.stopPropagation(); toggleFavorite(key); renderSidebar(); };
+    panel.appendChild(el);
+  });
+}
+
+function renderRecent(){
+  const panel = document.getElementById('panel-recent');
+  if(recent.length === 0){
+    panel.innerHTML = '<div class="empty-msg">최근 본 항목이 여기 표시됩니다</div>';
+    return;
+  }
+  panel.innerHTML = '';
+  recent.forEach(key => {
+    const found = findByKey(key);
+    if(!found) return;
+    const el = document.createElement('div');
+    el.className = 'nav-item';
+    el.innerHTML = `<span class="nav-title">${found.title}</span><span style="font-size:0.7rem;color:rgba(255,255,255,0.3)">${found.path.slice(0,-1).join(' / ')}</span>`;
+    el.querySelector('.nav-title').onclick = found.onClick;
+    panel.appendChild(el);
+  });
+}
+
+function findByKey(key){
+  const item = FLAT.find(f => f.path.join(' > ') === key);
+  if(!item) return null;
+  if(item.type === 'file'){
+    return { title:item.title, path:item.path, onClick: () => openFilePage(item.title, item.file, item.path, item.color) };
+  } else {
+    return { title:item.title, path:item.path, onClick: () => openTabPage(item.title, item.tabs, item.path, item.color) };
+  }
+}
+
+function addRecent(key){
+  recent = recent.filter(k => k !== key);
+  recent.unshift(key);
+  recent = recent.slice(0, 10);
+  localStorageSet(RECENT_KEY, JSON.stringify(recent));
+  renderRecent();
+}
+
+// 사이드바 탭 전환
+document.querySelectorAll('.sidebar-tab').forEach(tab => {
+  tab.onclick = () => {
+    document.querySelectorAll('.sidebar-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.sidebar-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+  };
+});
+
+// 사이드바 검색
+document.getElementById('sidebarSearch').addEventListener('input', function(){
+  renderSidebar(this.value.trim() || null);
+});
+
+// ===== 글자 크기 =====
+let fontScale = parseFloat(localStorageGet('font_scale')) || 1;
+document.documentElement.style.setProperty('--font-scale', fontScale);
+function changeFont(dir){
+  if(dir === 0) fontScale = 1;
+  else fontScale = Math.min(1.4, Math.max(0.8, fontScale + dir*0.1));
+  document.documentElement.style.setProperty('--font-scale', fontScale);
+  localStorageSet('font_scale', fontScale);
+}
+
+// ===== 페이지 렌더링 =====
+function setActiveNav(key){
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll(`.nav-item[data-key="${CSS.escape(key)}"]`).forEach(el => el.classList.add('active'));
+}
+
+function renderBreadcrumb(path){
+  return '<span onclick="renderHome()" style="cursor:pointer">홈</span>' +
+    path.map(p => `<span style="color:var(--border)">›</span><span>${p}</span>`).join('');
+}
+
+function openFilePage(title, file, path, color){
+  const key = path.join(' > ');
+  setActiveNav(key);
+  addRecent(key);
+  currentBreadcrumb = path;
+  fetch(file).then(r => r.ok ? r.text() : Promise.reject()).then(md => {
+    renderPageShell(title, path, mdToHtml(md), null, null);
+  }).catch(() => {
+    renderPageShell(title, path, '<div class="empty-content"><div class="big">📝</div><p>아직 작성되지 않은 페이지입니다.<br><code>'+file+'</code> 파일을 작성해주세요.</p></div>', null, null);
+  });
+}
+
+function openTabPage(title, tabs, path, color, tabIndex){
+  const key = path.join(' > ');
+  setActiveNav(key);
+  addRecent(key);
+  currentBreadcrumb = path;
+  currentTabs = tabs;
+  currentTabIndex = tabIndex || 0;
+  loadTab(title, path, currentTabIndex);
+}
+
+function loadTab(title, path, tabIndex){
+  const tab = currentTabs[tabIndex];
+  fetch(tab.file).then(r => r.ok ? r.text() : Promise.reject()).then(md => {
+    renderPageShell(title, path, mdToHtml(md), currentTabs, tabIndex);
+  }).catch(() => {
+    renderPageShell(title, path, '<div class="empty-content"><div class="big">📝</div><p>아직 작성되지 않은 페이지입니다.<br><code>'+tab.file+'</code> 파일을 작성해주세요.</p></div>', currentTabs, tabIndex);
+  });
+}
+
+function renderPageShell(title, path, bodyHtml, tabs, tabIndex){
+  let html = `<div class="breadcrumb">${renderBreadcrumb(path)}</div>`;
+  html += `<div class="page-title">${title}</div>`;
+  if(tabs){
+    html += '<div class="page-tabs">';
+    tabs.forEach((t,i) => {
+      html += `<div class="page-tab ${i===tabIndex?'active':''}" data-tabidx="${i}">${t.title}</div>`;
+    });
+    html += '</div>';
+  }
+  html += `<div id="toc-area"></div>`;
+  html += `<div class="content-body" id="contentBody">${bodyHtml}</div>`;
+  document.getElementById('page').innerHTML = html;
+
+  if(tabs){
+    document.querySelectorAll('.page-tab').forEach(t => {
+      t.onclick = () => {
+        currentTabIndex = parseInt(t.dataset.tabidx);
+        loadTab(title, path, currentTabIndex);
+      };
+    });
+  }
+
+  buildToc();
+  addCopyButtons();
+}
+
+// ===== 목차 생성 =====
+function buildToc(){
+  const body = document.getElementById('contentBody');
+  const headers = body.querySelectorAll('h2');
+  if(headers.length < 2) { return; }
+  let toc = '<div class="toc"><div class="toc-title">목차</div>';
+  headers.forEach((h, i) => {
+    const id = 'sec-' + i;
+    h.id = id;
+    toc += `<a onclick="document.getElementById('${id}').scrollIntoView({behavior:'smooth'})">${h.textContent}</a>`;
+  });
+  toc += '</div>';
+  document.getElementById('toc-area').innerHTML = toc;
+}
+
+// ===== 복사 버튼 =====
+function addCopyButtons(){
+  document.querySelectorAll('#contentBody pre').forEach(pre => {
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.textContent = '복사';
+    btn.onclick = () => {
+      navigator.clipboard.writeText(pre.textContent.replace('복사','').trim());
+      btn.textContent = '복사됨!';
+      setTimeout(() => btn.textContent = '복사', 1500);
+    };
+    pre.appendChild(btn);
+  });
+}
+
+// ===== 홈 화면 =====
+function renderHome(){
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  let html = `<div class="breadcrumb">홈</div>`;
+  html += `<div class="page-title">여행2팀 해적단 업무 매뉴얼</div>`;
+  html += '<div class="home-grid">';
+  MENU.categories.forEach(cat => {
+    const count = countItems(cat.items);
+    html += `<div class="home-card" onclick="document.getElementById('folder-${MENU.categories.indexOf(cat)}').scrollIntoView({behavior:'smooth'}); document.getElementById('folder-${MENU.categories.indexOf(cat)}').classList.add('open')">
+      <div class="home-card-dot" style="background:${cat.color}"></div>
+      <div class="home-card-title">${cat.label}</div>
+      <div class="home-card-count">${count}개 항목</div>
+    </div>`;
+  });
+  html += '</div>';
+  document.getElementById('page').innerHTML = html;
+}
+
+function countItems(items){
+  let c = 0;
+  items.forEach(item => {
+    if(item.file) c++;
+    if(item.tabs) c += item.tabs.length;
+    if(item.items) c += countItems(item.items);
+  });
+  return c;
+}
+
+// ===== 검색 결과를 본문에서도 (sidebar search 외 추가 기능 없음, sidebar로 충분) =====
+
+// ===== 간단 마크다운 -> HTML 변환기 =====
+function mdToHtml(md){
+  let lines = md.split('\n');
+  let html = '';
+  let inTable = false, tableHeader = [], tableRows = [];
+  let inList = false, listType = '';
+  let inCode = false, codeBuf = [];
+  let inQuote = false, quoteBuf = [];
+
+  function flushList(){ if(inList){ html += '</'+listType+'>'; inList=false; } }
+  function flushTable(){
+    if(inTable){
+      html += '<table><thead><tr>' + tableHeader.map(h=>`<th>${inline(h)}</th>`).join('') + '</tr></thead><tbody>';
+      tableRows.forEach(r => { html += '<tr>' + r.map(c=>`<td>${inline(c)}</td>`).join('') + '</tr>'; });
+      html += '</tbody></table>';
+      inTable = false; tableHeader=[]; tableRows=[];
+    }
+  }
+  function flushQuote(){
+    if(inQuote){
+      html += '<blockquote>' + quoteBuf.map(l=>`<p>${inline(l)}</p>`).join('') + '</blockquote>';
+      inQuote = false; quoteBuf=[];
+    }
+  }
+  function inline(text){
+    text = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    text = text.replace(/`(.+?)`/g, '<code>$1</code>');
+    text = text.replace(/!\[(.*?)\]\((.*?)\)/g, '<img alt="$1" src="$2">');
+    text = text.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>');
+    return text;
+  }
+
+  for(let raw of lines){
+    let line = raw;
+
+    if(line.startsWith('```')){
+      if(!inCode){ inCode = true; codeBuf = []; }
+      else { html += '<pre>' + codeBuf.join('\n').replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</pre>'; inCode = false; }
+      continue;
+    }
+    if(inCode){ codeBuf.push(line); continue; }
+
+    if(line.trim().startsWith('|')){
+      flushList(); flushQuote();
+      const cells = line.trim().slice(1,-1).split('|').map(c=>c.trim());
+      if(cells.every(c => /^-+$/.test(c))){ continue; } // separator
+      if(!inTable){ inTable = true; tableHeader = cells; }
+      else { tableRows.push(cells); }
+      continue;
+    } else { flushTable(); }
+
+    if(line.trim().startsWith('>')){
+      flushList();
+      inQuote = true;
+      quoteBuf.push(line.trim().replace(/^>\s?/,''));
+      continue;
+    } else { flushQuote(); }
+
+    if(/^#{1,3}\s/.test(line)){
+      flushList();
+      const level = line.match(/^(#{1,3})/)[1].length;
+      const text = line.replace(/^#{1,3}\s/, '');
+      html += `<h${level}>${inline(text)}</h${level}>`;
+      continue;
+    }
+
+    if(/^[-*]\s/.test(line)){
+      if(!inList || listType !== 'ul'){ flushList(); html += '<ul>'; inList=true; listType='ul'; }
+      html += `<li>${inline(line.replace(/^[-*]\s/, ''))}</li>`;
+      continue;
+    }
+    if(/^\d+\.\s/.test(line)){
+      if(!inList || listType !== 'ol'){ flushList(); html += '<ol>'; inList=true; listType='ol'; }
+      html += `<li>${inline(line.replace(/^\d+\.\s/, ''))}</li>`;
+      continue;
+    }
+    flushList();
+
+    if(line.trim() === ''){ continue; }
+    html += `<p>${inline(line)}</p>`;
+  }
+  flushList(); flushTable(); flushQuote();
+  return html;
+}
+</script>
+</body>
+</html>
