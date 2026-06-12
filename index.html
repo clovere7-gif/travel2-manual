@@ -508,12 +508,41 @@ function renderHome(){
   html += '<div class="home-grid">';
   MENU.categories.forEach(cat => {
     const count = countItems(cat.items);
-    html += `<div class="home-card" onclick="document.getElementById('folder-${MENU.categories.indexOf(cat)}').scrollIntoView({behavior:'smooth'}); document.getElementById('folder-${MENU.categories.indexOf(cat)}').classList.add('open')">
-      <div class="home-card-dot" style="background:${cat.color}"></div>
-      <div class="home-card-title">${cat.label}</div>
-      <div class="home-card-count">${count}개 항목</div>
-    </div>`;
+    html += `<div class="home-card" onclick="openCategoryPage('${cat.id}')">
+          <div class="home-card-dot" style="background:${cat.color}"></div>
+          <div class="home-card-title">${cat.label}</div>
+          <div class="home-card-count">${count}개 항목</div>
+        </div>`;
   });
+  html += '</div>';
+  document.getElementById('page').innerHTML = html;
+}
+  function openCategoryPage(catId){
+  const cat = MENU.categories.find(c => c.id === catId);
+  let html = `<div class="breadcrumb">${renderBreadcrumb([cat.label])}</div>`;
+  html += `<div class="page-title">${cat.label}</div>`;
+  html += '<div class="home-grid">';
+  function collect(items, path){
+    items.forEach(item => {
+      const newPath = [...path, item.title];
+      if(item.file){
+        html += `<div class="home-card" onclick='openFilePage(${JSON.stringify(item.title)}, ${JSON.stringify(item.file)}, ${JSON.stringify(newPath)}, ${JSON.stringify(cat.color)})'>
+          <div class="home-card-dot" style="background:${cat.color}"></div>
+          <div class="home-card-title">${item.title}</div>
+        </div>`;
+      }
+      if(item.tabs){
+        html += `<div class="home-card" onclick='openTabPage(${JSON.stringify(item.title)}, ${JSON.stringify(item.tabs)}, ${JSON.stringify(newPath)}, ${JSON.stringify(cat.color)})'>
+          <div class="home-card-dot" style="background:${cat.color}"></div>
+          <div class="home-card-title">${item.title}</div>
+        </div>`;
+      }
+      if(item.items){
+        collect(item.items, newPath);
+      }
+    });
+  }
+  collect(cat.items, [cat.label]);
   html += '</div>';
   document.getElementById('page').innerHTML = html;
 }
