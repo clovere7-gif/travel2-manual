@@ -50,6 +50,7 @@
         {
           "title": "당일앱",
           "items": [
+            { "title": "공통 및 특이사항", "file": "content/ota-dayapp-common.md" },
             {
               "title": "야놀자",
               "tabs": [
@@ -119,6 +120,7 @@
         {
           "title": "투어",
           "items": [
+            { "title": "공통 및 특이사항", "file": "content/ota-tour-common.md" },
             {
               "title": "웹투어",
               "tabs": [
