@@ -70,6 +70,8 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .font-ctrl button:hover{background:var(--accent-light);color:var(--accent-text)}
 
 .breadcrumb{display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--text-tertiary);margin-bottom:20px}
+.breadcrumb span[data-crumb]{cursor:pointer}
+.breadcrumb span[data-crumb]:hover{color:var(--accent-text)}
 .page-title{font-size:1.55rem;font-weight:700;color:var(--text-primary);margin-bottom:14px}
 
 .page-tabs{display:flex;gap:4px;margin-bottom:24px;border-bottom:1px solid var(--border)}
@@ -173,6 +175,7 @@ let currentFile = null;
 let currentTabs = null;
 let currentTabIndex = 0;
 let currentBreadcrumb = [];
+let isRestoringFromHash = false; // 해시 변경에 의한 라우팅인지 구분 (중복 push 방지)
 
 const FAVORITES_KEY = 'manual_favorites';
 const RECENT_KEY = 'manual_recent';
@@ -190,7 +193,7 @@ fetch('menu.json')
     MENU = data;
     buildFlatIndex();
     renderSidebar();
-    renderHome();
+    routeFromHash(); // 최초 로드 시 현재 URL 해시에 맞는 화면 표시 (없으면 홈)
   })
   .catch(err => {
     document.getElementById('page').innerHTML =
@@ -201,20 +204,21 @@ fetch('menu.json')
 function buildFlatIndex(){
   FLAT = [];
   MENU.categories.forEach(cat => {
-    walkItems(cat.items, [cat.label], cat.color);
+    walkItems(cat.items, [cat.label], cat.color, [cat.id]);
   });
 }
-function walkItems(items, path, color){
+function walkItems(items, path, color, idPath){
   items.forEach(item => {
     const newPath = [...path, item.title];
+    const newIdPath = [...idPath, item.title];
     if(item.file){
-      FLAT.push({ title:item.title, file:item.file, path:newPath, color, type:'file' });
+      FLAT.push({ title:item.title, file:item.file, path:newPath, color, type:'file', idPath:newIdPath, catId:idPath[0] });
     }
     if(item.tabs){
-      FLAT.push({ title:item.title, tabs:item.tabs, path:newPath, color, type:'tabs' });
+      FLAT.push({ title:item.title, tabs:item.tabs, path:newPath, color, type:'tabs', idPath:newIdPath, catId:idPath[0] });
     }
     if(item.items){
-      walkItems(item.items, newPath, color);
+      walkItems(item.items, newPath, color, newIdPath);
     }
   });
 }
@@ -402,50 +406,159 @@ function changeFont(dir){
   localStorageSet('font_scale', fontScale);
 }
 
+// ========================================================================
+// ===== URL 해시 라우팅 (새로고침 시 현재 페이지 유지 + 브레드크럼 이동) =====
+// ========================================================================
+// 해시 형식
+//   #home                                  → 홈
+//   #cat/{catId}                           → 카테고리 목록 페이지
+//   #item/{catId}/{idPath...}              → file 또는 tabs 항목 (idPath는 title 경로를 URL 인코딩하여 / 로 연결)
+//   #item/{catId}/{idPath...}?tab={index}  → 탭 항목의 특정 탭
+
+function encodeIdPath(idPath){
+  return idPath.map(s => encodeURIComponent(s)).join('/');
+}
+function decodeIdPath(str){
+  return str.split('/').map(s => decodeURIComponent(s));
+}
+
+function setHash(hash){
+  isRestoringFromHash = true;
+  if(location.hash !== hash){
+    location.hash = hash;
+  }
+  // setTimeout으로 플래그 해제: hashchange 이벤트가 비동기로 뒤따라오므로
+  setTimeout(() => { isRestoringFromHash = false; }, 0);
+}
+
+window.addEventListener('hashchange', function(){
+  if(isRestoringFromHash) return; // 코드가 직접 바꾼 해시는 무시 (중복 라우팅 방지)
+  routeFromHash();
+});
+
+function routeFromHash(){
+  const hash = location.hash.replace(/^#/, '');
+  if(!hash || hash === 'home'){
+    renderHome();
+    return;
+  }
+  if(hash.startsWith('cat/')){
+    const catId = decodeURIComponent(hash.slice(4));
+    const cat = MENU.categories.find(c => c.id === catId);
+    if(cat){ openCategoryPage(catId, true); return; }
+    renderHome();
+    return;
+  }
+  if(hash.startsWith('item/')){
+    const rest = hash.slice(5);
+    const [pathPart, queryPart] = rest.split('?');
+    const idPath = decodeIdPath(pathPart);
+    const catId = idPath[0];
+    const titlePath = idPath.slice(1);
+    const fullKey = titlePath; // FLAT의 path는 [catLabel, ...titles] 이므로 title 매칭 필요
+    // FLAT에서 catId + title 경로(마지막 title)로 항목 찾기
+    const found = FLAT.find(f => f.catId === catId && f.idPath.slice(1).join('>') === titlePath.join('>'));
+    if(found){
+      let tabIndex = 0;
+      if(queryPart){
+        const m = queryPart.match(/tab=(\d+)/);
+        if(m) tabIndex = parseInt(m[1]);
+      }
+      if(found.type === 'file'){
+        openFilePage(found.title, found.file, found.path, found.color, true);
+      } else {
+        openTabPage(found.title, found.tabs, found.path, found.color, tabIndex, true);
+      }
+      return;
+    }
+    renderHome();
+    return;
+  }
+  renderHome();
+}
+
 // ===== 페이지 렌더링 =====
 function setActiveNav(key){
   document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
   document.querySelectorAll(`.nav-item[data-key="${CSS.escape(key)}"]`).forEach(el => el.classList.add('active'));
 }
 
-function renderBreadcrumb(path){
-  return '<span onclick="renderHome()" style="cursor:pointer">홈</span>' +
-    path.map(p => `<span style="color:var(--border)">›</span><span>${p}</span>`).join('');
+function renderBreadcrumb(path, idPath, catId){
+  // path: ["기초/입문", "프로그램 기본", "고마스터"] 같은 표시용 타이틀 배열
+  // idPath: catId를 포함한 FLAT idPath (없으면 카테고리만 있는 경우)
+  let html = `<span data-crumb onclick="goHome()">홈</span>`;
+  path.forEach((p, i) => {
+    html += `<span style="color:var(--border)">›</span>`;
+    const isLast = (i === path.length - 1);
+    if(isLast){
+      html += `<span>${p}</span>`;
+    } else if(i === 0 && catId){
+      // 첫 번째 크럼 = 카테고리 라벨 → 카테고리 페이지로 이동
+      html += `<span data-crumb onclick="openCategoryPage('${catId}')">${p}</span>`;
+    } else {
+      // 중간 단계(서브폴더) 클릭 시: 해당 path까지의 항목들이 모여있는 카테고리 페이지로 이동
+      // (서브폴더 자체를 펼치는 페이지가 없으므로, 가장 가까운 상위인 카테고리 페이지로 이동시킴)
+      html += `<span data-crumb onclick="openCategoryPage('${catId}')">${p}</span>`;
+    }
+  });
+  return html;
 }
 
-function openFilePage(title, file, path, color){
+function goHome(){
+  setHash('#home');
+  renderHome();
+}
+
+function openFilePage(title, file, path, color, fromHash){
   const key = path.join(' > ');
   setActiveNav(key);
   addRecent(key);
   currentBreadcrumb = path;
+  const flatItem = FLAT.find(f => f.path.join(' > ') === key);
+  const catId = flatItem ? flatItem.catId : null;
+  if(!fromHash && catId){
+    setHash('#item/' + encodeIdPath(flatItem.idPath.length ? [catId, ...flatItem.idPath.slice(1)] : [catId]));
+  }
   fetch(file).then(r => r.ok ? r.text() : Promise.reject()).then(md => {
-    renderPageShell(title, path, mdToHtml(md), null, null);
+    renderPageShell(title, path, mdToHtml(md), null, null, catId);
   }).catch(() => {
-    renderPageShell(title, path, '<div class="empty-content"><div class="big">📝</div><p>아직 작성되지 않은 페이지입니다.<br><code>'+file+'</code> 파일을 작성해주세요.</p></div>', null, null);
+    renderPageShell(title, path, '<div class="empty-content"><div class="big">📝</div><p>아직 작성되지 않은 페이지입니다.<br><code>'+file+'</code> 파일을 작성해주세요.</p></div>', null, null, catId);
   });
 }
 
-function openTabPage(title, tabs, path, color, tabIndex){
+function openTabPage(title, tabs, path, color, tabIndex, fromHash){
   const key = path.join(' > ');
   setActiveNav(key);
   addRecent(key);
   currentBreadcrumb = path;
   currentTabs = tabs;
   currentTabIndex = tabIndex || 0;
-  loadTab(title, path, currentTabIndex);
+  const flatItem = FLAT.find(f => f.path.join(' > ') === key);
+  const catId = flatItem ? flatItem.catId : null;
+  if(!fromHash && catId){
+    setHash('#item/' + encodeIdPath([catId, ...flatItem.idPath.slice(1)]) + '?tab=' + currentTabIndex);
+  }
+  loadTab(title, path, currentTabIndex, catId);
 }
 
-function loadTab(title, path, tabIndex){
+function loadTab(title, path, tabIndex, catId){
   const tab = currentTabs[tabIndex];
+  // 탭 전환 시에도 해시의 tab 파라미터 갱신
+  const key = path.join(' > ');
+  const flatItem = FLAT.find(f => f.path.join(' > ') === key);
+  const cid = catId || (flatItem ? flatItem.catId : null);
+  if(cid && flatItem){
+    setHash('#item/' + encodeIdPath([cid, ...flatItem.idPath.slice(1)]) + '?tab=' + tabIndex);
+  }
   fetch(tab.file).then(r => r.ok ? r.text() : Promise.reject()).then(md => {
-    renderPageShell(title, path, mdToHtml(md), currentTabs, tabIndex);
+    renderPageShell(title, path, mdToHtml(md), currentTabs, tabIndex, cid);
   }).catch(() => {
-    renderPageShell(title, path, '<div class="empty-content"><div class="big">📝</div><p>아직 작성되지 않은 페이지입니다.<br><code>'+tab.file+'</code> 파일을 작성해주세요.</p></div>', currentTabs, tabIndex);
+    renderPageShell(title, path, '<div class="empty-content"><div class="big">📝</div><p>아직 작성되지 않은 페이지입니다.<br><code>'+tab.file+'</code> 파일을 작성해주세요.</p></div>', currentTabs, tabIndex, cid);
   });
 }
 
-function renderPageShell(title, path, bodyHtml, tabs, tabIndex){
-  let html = `<div class="breadcrumb">${renderBreadcrumb(path)}</div>`;
+function renderPageShell(title, path, bodyHtml, tabs, tabIndex, catId){
+  let html = `<div class="breadcrumb">${renderBreadcrumb(path, null, catId)}</div>`;
   html += `<div class="page-title">${title}</div>`;
   if(tabs){
     html += '<div class="page-tabs">';
@@ -462,7 +575,7 @@ function renderPageShell(title, path, bodyHtml, tabs, tabIndex){
     document.querySelectorAll('.page-tab').forEach(t => {
       t.onclick = () => {
         currentTabIndex = parseInt(t.dataset.tabidx);
-        loadTab(title, path, currentTabIndex);
+        loadTab(title, path, currentTabIndex, catId);
       };
     });
   }
@@ -518,9 +631,13 @@ function renderHome(){
   html += '</div>';
   document.getElementById('page').innerHTML = html;
 }
-  function openCategoryPage(catId){
+  function openCategoryPage(catId, fromHash){
   const cat = MENU.categories.find(c => c.id === catId);
-  let html = `<div class="breadcrumb">${renderBreadcrumb([cat.label])}</div>`;
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  if(!fromHash){
+    setHash('#cat/' + encodeURIComponent(catId));
+  }
+  let html = `<div class="breadcrumb">${renderBreadcrumb([cat.label], null, catId)}</div>`;
   html += `<div class="page-title">${cat.label}</div>`;
   html += '<div class="home-grid">';
   function collect(items, path){
