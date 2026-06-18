@@ -18,4 +18,4 @@
 
 ## 3-1.구분선택 클릭후 / 대분류 > 채널선택 > 대매사 주문번호 입력
 
-![예약 상세내용 화면](images/gomastere/basic-gomaster-recommend-03.png)
+![예약 상세내용 화면](images/gomastere/basic-gomaster-recommend-04.png)
