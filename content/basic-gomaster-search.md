@@ -4,16 +4,16 @@
 
 고마스터 접속 후 상단 메뉴 [예약관리] > **[전체] 예약리스트** 클릭합니다.
 
-![예약관리 메뉴에서 전체 예약리스트 선택](images/gomaster-search-01.png)
+![예약관리 메뉴에서 전체 예약리스트 선택](images/gomaster/gomaster-search-01.png)
 
 ## 2. 전체 예약목록 확인
 
 [전체] 예약리스트에서 전체 예약목록을 확인할 수 있습니다.
 
-![전체 예약리스트 화면](images/gomaster-search-02.png)
+![전체 예약리스트 화면](images/gomaster/gomaster-search-02.png)
 
 ## 3. 예약 상세내용 확인
 
 목록에서 이름을 클릭하면 예약 상세내용을 확인할 수 있습니다.
 
-![예약 상세내용 화면](images/gomaster-search-03.png)
+![예약 상세내용 화면](images/gomaster/gomaster-search-03.png)
