@@ -8,6 +8,6 @@
 
 ## 2. 예약건 검색
 
-![이미지](images/gomaster-search-01.png)
+![이미지](images/wing/basic-wings-search-01.png)
 
 고객명, 전화전호, 일자 등으로 예약확인
