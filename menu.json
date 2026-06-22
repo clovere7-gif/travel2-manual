@@ -342,6 +342,7 @@
       "label": "기타",
       "color": "#888780",
       "items": [
+        { "title": "전화응대", "file": "content/etc-phone.md" },
         {
           "title": "리뷰",
           "tabs": [
