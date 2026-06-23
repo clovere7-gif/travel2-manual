@@ -24,8 +24,8 @@
               "tabs": [
                 { "title": "예약조회", "file": "content/basic-wings-search.md" },
                 { "title": "객실수량확인", "file": "content/basic-wings-roomcount.md" },
-                { "title": "예약하기 A 연동", "file": "content/basic-wings-reserve.md" },
-                { "title": "예약하기 B 미연동", "file": "content/basic-wings-reserve.md" },
+                { "title": "예약하기 A 연동", "file": "content/basic-wings-reserve1.md" },
+                { "title": "예약하기 B 미연동", "file": "content/basic-wings-reserve2.md" },
                 { "title": "서비스코드등록", "file": "content/basic-wings-servicecode.md" }
               ]
             },
