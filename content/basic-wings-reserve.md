@@ -4,35 +4,37 @@
 
 ## 1.윙스 예약 - 연동예약
 
-1. 윙스접속 > ☆ 클릭 > 최근 메뉴 예약 혹은 **예약관리 예약** 클릭합니다.
-2. 1. 윙스접속 > ☆ 클릭 > 최근 메뉴 예약 혹은 예약관리 예약 클릭 / 최근 메뉴 전체고객목록 혹은 예약관리 전체 고객 목록 클릭
+1. 윙스접속 > ☆ 클릭 > 최근 메뉴 **전체고객 목록** 혹은 예약관리 메뉴 **전체고객 목록** 클릭합니다.
 
-![이미지](images/gomastere/basic-wings-reserve.md-01.png)
+![이미지](images/wing/basic-wings-reserve-01.PNG)
 
-## 2. 전체 예약목록 확인
+3. 예약 혹은 전체 고객 목록에서 연동 예약건 검색 (이름, 예약번호, 전화번호등) 후 클릭
 
-[전체] 예약리스트 > **관리자추천** 클릭합니다.
+![이미지](images/wing/basic-wings-reserve-02.PNG)
 
-![이미지](images/gomastere/basic-wings-reserve.md-02.png)
+3. 예약건 확인후 / 예약내용 중 빨간칸 입력확인 및 수정 > 저장
 
-## 3. 빨간칸 모두 입력후 (하단참조) > 관리자추천 클릭
+![이미지](images/wing/basic-wings-reserve-03.PNG)
 
-![이미지](images/gomastere/basic-wings-reserve.md-03.png)
+3-1. 채널별로 입력&수정해야하는 내용이 다를수있음
 
-① 구분선택 3-1
-② 예약자명, 전화번호 입력 
-전화번호없거나 입력필요없을시 [X] 클릭 010-0000-0000 으로
-③ 투숙일 선택 / 당일일경우 [당일]버튼클릭 오늘날짜로 세팅
-④ 업체명 시설버튼 클릭
-⑤ 룸타입 ⓞ 선택
-⑥ 판매가, 입금가 입력 / 띄어쓰기, 빈칸, ","(쉼표) 모두입력가능
-⑦ 관리자추천
+## 예시
 
-## 3-1.구분선택 클릭후 / 대분류 > 채널선택 > 대매사 주문번호 입력
+![이미지](images/wing/basic-wings-reserve-04.PNG)
 
-구분선택 클릭후 / 대분류 > 채널선택 > 대매사 주문번호 입력
+4. 완료
 
-![이미지](images/gomastere/basic-wings-reserve.md-04.png)
+예약되었습니다 ~ 이름까지 드래그 
+
+![이미지](images/wing/basic-wings-reserve-21.PNG)
+
+고마스터 메모에 추가
+
+![이미지](images/wing/basic-wings-reserve-22.PNG)
+
+고마스터 확정 예약번호(윙스번호 8자리숫자) 확인
+
+![이미지](images/wing/basic-wings-reserve-22.PNG)
 
 
 # 윙스 예약 - B.미연동 수기예약
