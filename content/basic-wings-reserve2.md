@@ -10,12 +10,12 @@
 
 ![이미지](images/wing/basic-wings-reserve-12.PNG)
 
-3 빨간칸 모두 입력후 (하단참조) > 저장 > 다음예약건있을경우 저장후 신규클릭시 새로운예약생성가능
+> 3 빨간칸 모두 입력후 (하단참조) > 저장 > 다음예약건있을경우 저장후 신규클릭시 새로운예약생성가능
 
 ![이미지](images/wing/basic-wings-reserve-14.PNG)
 ![이미지](images/wing/basic-wings-reserve-13.PNG)
 
-3-1 예약자명 입력 & 하단 휴대폰/이메일에 고객 연락처 입력
+> 3-1 예약자명 입력 & 하단 휴대폰/이메일에 고객 연락처 입력
 3-2 입실일입력 > 달력클릭 날짜선택 (타이핑가능)
 
 ![이미지](images/wing/basic-wings-reserve-15.PNG)
