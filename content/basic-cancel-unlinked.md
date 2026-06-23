@@ -18,7 +18,7 @@
 - 로그인 후 왼쪽 상단 호텔 클릭 > 예약번호 검색 (화면에서 Ctrl + F 누르고 예약번호 복붙해서 검색)
 - 상세 보기 누르면 하기 사진 참고
 
-![이미지](images/cancel/basic-cancel-linked-7.PNG)
+![이미지](images/cancel/basic-cancel-linked-07.PNG)
 
 - 고객 취소 수수료(전체) = 위약취소 시설 판매가
 - 고객 취소 수수료(제휴점 수취분) = 위약취소 시설 입금가
@@ -29,14 +29,14 @@
 
 - 엑스트라넷: https://partner.goodchoice.kr/login
 
-![이미지](images/cancel/basic-cancel-linked-8.PNG)
+![이미지](images/cancel/basic-cancel-linked-08.PNG)
 
 - 담당 메일로 취소 메일 인입 시 → 고객 취소 수수료 확인
 - 고객 취소 수수료 0원이 아닐 경우 하기 절차 진행
 
 - 엑스트라넷 로그인 후 취소 수수료 확인
 
-![이미지](images/cancel/basic-cancel-linked-9.PNG)
+![이미지](images/cancel/basic-cancel-linked-09.PNG)
 
 - 로그인 후 호텔 선택 → 오른쪽 상단 예약번호 검색
 
