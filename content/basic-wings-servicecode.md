@@ -10,11 +10,11 @@
 
 ![이미지](images/wing/basic-wings-servicecode-02.PNG)
 
-1. 예약건 진행후 > 일별요금 > 스페셜서비스 > 추가
+1 예약건 진행후 > 일별요금 > 스페셜서비스 > 추가
 
 ![이미지](images/wing/basic-wings-servicecode-03.PNG)
 
-2. 추가 클릭시 > 서비스코드 등록 생성 > 날짜 서비스 > 수량 > 금액 입력
+2 추가 클릭시 > 서비스코드 등록 생성 > 날짜 서비스 > 수량 > 금액 입력
 
 ![이미지](images/wing/basic-wings-servicecode-04.PNG)
 
