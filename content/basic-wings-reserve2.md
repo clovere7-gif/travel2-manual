@@ -1,6 +1,6 @@
 # 윙스 예약 - B.미연동 수기예약
 
-## 1.윙스 예약 - 연동예약
+## 윙스 예약 - 미연동예약
 
 1. 윙스접속 > ☆ 클릭 > 최근 메뉴 예약 혹은 **예약관리 예약** 클릭합니다.
 
@@ -12,8 +12,8 @@
 
 3. 빨간칸 모두 입력후 (하단참조) > 저장 > 다음예약건있을경우 저장후 신규클릭시 새로운예약생성가능
 
-![이미지](images/wing/basic-wings-reserve-13.PNG)
 ![이미지](images/wing/basic-wings-reserve-14.PNG)
+![이미지](images/wing/basic-wings-reserve-13.PNG)
 
 3-1 예약자명 입력 & 하단 휴대폰/이메일에 고객 연락처 입력
 3-2 입실일입력 > 달력클릭 날짜선택 (타이핑가능)
@@ -26,8 +26,7 @@
 
 3-4 객실타입 / 빨간네모 클릭 > 객실타입 전체 팝업 > 객실 더블클릭
 
-![이미지](images/wing/basic-wings-reserve-17.PNG)
-![이미지](images/wing/basic-wings-reserve-18.PNG)
+![이미지](images/wing/basic-wings-reserve-17.PNG) ![이미지](images/wing/basic-wings-reserve-18.PNG)
 
 3-5 객실수량 입력 혹은 확인
 
@@ -57,4 +56,4 @@
 
 고마스터 확정 예약번호(윙스번호 8자리숫자) 확인
 
-![이미지](images/wing/basic-wings-reserve-22.PNG)
+![이미지](images/wing/basic-wings-reserve-23.PNG)
