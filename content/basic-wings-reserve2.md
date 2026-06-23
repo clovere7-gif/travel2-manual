@@ -2,15 +2,15 @@
 
 ## 윙스 예약 - B.미연동 수기예약
 
-1. 윙스접속 > ☆ 클릭 > 최근 메뉴 예약 혹은 **예약관리 예약** 클릭합니다.
+1 윙스접속 > ☆ 클릭 > 최근 메뉴 예약 혹은 **예약관리 예약** 클릭합니다.
 
 ![이미지](images/wing/basic-wings-reserve-11.PNG)
 
-2. 예약 > 신규예약 FIT 클릭
+2 예약 > 신규예약 FIT 클릭
 
 ![이미지](images/wing/basic-wings-reserve-12.PNG)
 
-3. 빨간칸 모두 입력후 (하단참조) > 저장 > 다음예약건있을경우 저장후 신규클릭시 새로운예약생성가능
+3 빨간칸 모두 입력후 (하단참조) > 저장 > 다음예약건있을경우 저장후 신규클릭시 새로운예약생성가능
 
 ![이미지](images/wing/basic-wings-reserve-14.PNG)
 ![이미지](images/wing/basic-wings-reserve-13.PNG)
