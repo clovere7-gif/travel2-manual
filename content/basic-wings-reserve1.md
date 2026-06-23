@@ -32,4 +32,4 @@
 
 고마스터 확정 예약번호(윙스번호 8자리숫자) 확인
 
-![이미지](images/wing/basic-wings-reserve-22.PNG)
+![이미지](images/wing/basic-wings-reserve-23.PNG)
