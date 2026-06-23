@@ -33,7 +33,7 @@
               "title": "예약취소",
               "tabs": [
                 { "title": "취소기준", "file": "content/basic-cancel-criteria.md" },
-                { "title": "연동취소", "file": "content/basic-cancel-linked.md" },
+                { "title": "예약취소", "file": "content/basic-cancel-linked.md" },
                 { "title": "위약취소", "file": "content/basic-cancel-unlinked.md" },
                 { "title": "결제취소", "file": "content/basic-cancel-payment.md" }
               ]
