@@ -21,7 +21,7 @@
 2-1 일자 / 날짜 선택 
 2-2 서비스 / 스페셜서비스 중 서비스코드 클릭
 
-![이미지](images/wing/basic-wings-servicecode-05.PNG) ![이미지](images/wing/basic-wings-servicecode-05.PNG)
+![이미지](images/wing/basic-wings-servicecode-05.PNG)
 
 2-3 수량, 금액 확인 / 예약에 맞는 수량입력 > 금액(자동설정) 금액 다를시 확인후 수정
 
