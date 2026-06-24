@@ -15,7 +15,6 @@
 5. 변경하려는 객실 선택
 6. 판매상태 클릭 변경
 
-
 ## 2. 요금수정
 
 ![요금수정 화면](images/ota/coupang/ota-social-coupang-reserve-08.PNG)
