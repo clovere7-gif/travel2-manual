@@ -17,8 +17,6 @@
 
 ![하이웍스 소셜 메일함](images/ota/onda/ota-social-onda-reserve-01.PNG)
 
----
-
 ### 2. 예약진행 (전체 미연동)
 
 예약 알림메일 확인 후 관리자 사이트 접속
