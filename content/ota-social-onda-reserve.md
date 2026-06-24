@@ -4,15 +4,15 @@
 
 ## 1. 메일 확인
 
-메일 로그인 후 개인메일함 **소셜**에서 예약 확인
-
 ![하이웍스 소셜 메일함](images/ota/onda/ota-social-onda-reserve-01.PNG)
+
+메일 로그인 후 개인메일함 **소셜**에서 예약 확인
 
 ## 2. 예약진행 (전체 미연동)
 
-예약 알림메일 확인 후 관리자 사이트 접속
-
 ![온다 알림메일 바우처](images/ota/onda/ota-social-onda-reserve-02.PNG)
+
+예약 알림메일 확인 후 관리자 사이트 접속
 
 ![관리자 사이트 예약목록](images/ota/onda/ota-social-onda-reserve-03.PNG)
 
