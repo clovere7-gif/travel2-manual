@@ -30,6 +30,6 @@
 
 > 예약 완료 후 상단 **목록으로 돌아가기** 클릭
 
-![예약/취소 관리 목록](images/ota/coupang/ota-social-coupang-reserve-05.PNG)
+![예약/취소 관리 목록](images/ota/coupang/ota-social-coupang-reserve-06.PNG)
 
 > 예약완료 후 관리번호등록(초기예약 시 공란)에 오션투유 성함+입실(OOO) 혹은 윙스 번호 입력 후 저장
