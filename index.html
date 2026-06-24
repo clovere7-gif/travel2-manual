@@ -683,10 +683,11 @@ function mdToHtml(md){
   let html = '';
   let inTable = false, tableHeader = [], tableRows = [];
   let inList = false, listType = '';
+  let olCount = 0;
   let inCode = false, codeBuf = [];
   let inQuote = false, quoteBuf = [];
 
-  function flushList(){ if(inList){ html += '</'+listType+'>'; inList=false; } }
+  function flushList(){ if(inList){ html += '</'+listType+'>'; inList=false; olCount=0; } }
   function flushTable(){
     if(inTable){
       html += '<table><thead><tr>' + tableHeader.map(h=>`<th>${inline(h)}</th>`).join('') + '</tr></thead><tbody>';
@@ -723,7 +724,7 @@ function mdToHtml(md){
     if(line.trim().startsWith('|')){
       flushList(); flushQuote();
       const cells = line.trim().slice(1,-1).split('|').map(c=>c.trim());
-      if(cells.every(c => /^-+$/.test(c))){ continue; } // separator
+      if(cells.every(c => /^-+$/.test(c))){ continue; }
       if(!inTable){ inTable = true; tableHeader = cells; }
       else { tableRows.push(cells); }
       continue;
@@ -749,33 +750,25 @@ function mdToHtml(md){
       html += `<li>${inline(line.replace(/^[-*]\s/, ''))}</li>`;
       continue;
     }
-    if(/^!\[.*?\]\(.*?\)$/.test(line.trim())){
-  if(inList && listType === 'ol'){
-    html += `</ol>${inline(line.trim())}<ol start="${olCount + 1}">`;
-  } else {
-    flushList();
-    html += `<p>${inline(line.trim())}</p>`;
-  }
-  continue;
-}
 
-    // 빈 줄: 목록 진행 중이면 끊지 않고 유지 (이미지 다음 번호 연속 허용)
-    if(line.trim() === ''){
-      if(!inList) { /* 빈줄 무시 */ }
+    if(/^\d+\.\s/.test(line)){
+      if(!inList || listType !== 'ol'){ flushList(); html += '<ol>'; inList=true; listType='ol'; olCount=0; }
+      olCount++;
+      html += `<li>${inline(line.replace(/^\d+\.\s/, ''))}</li>`;
       continue;
     }
 
-    // 이미지 단독 줄: 목록 안에 있으면 li 안에 넣어서 목록 유지
     if(/^!\[.*?\]\(.*?\)$/.test(line.trim())){
-  if(inList && listType === 'ol'){
-    const currentCount = (html.match(/<li>/g) || []).length;
-    html += `</ol>${inline(line.trim())}<ol start="${currentCount + 1}">`;
-  } else {
-    flushList();
-    html += `<p>${inline(line.trim())}</p>`;
-  }
-  continue;
-}
+      if(inList && listType === 'ol'){
+        html += `</ol>${inline(line.trim())}<ol start="${olCount + 1}">`;
+      } else {
+        flushList();
+        html += `<p>${inline(line.trim())}</p>`;
+      }
+      continue;
+    }
+
+    if(line.trim() === '') continue;
 
     flushList();
     html += `<p>${inline(line)}</p>`;
