@@ -2,7 +2,7 @@
 
 ## 1. 객실마감
 
-![요금/재고관리 마감 설정](images/ota/onda/ota-social-onda-reserve-06.PNG)
+![요금/재고관리 마감 설정](images/ota/onda/ota-social-onda-reserve-04.PNG)
 
 **관리자페이지 순서**
 
@@ -12,12 +12,7 @@
 
 ## 2. 요금수정
 
-![요금/재고관리 요금수정](images/ota/onda/ota-social-onda-reserve-07.PNG)
-![요금/재고관리 요금수정](images/ota/onda/ota-social-onda-reserve-08.PNG)
-![요금/재고관리 요금수정](images/ota/onda/ota-social-onda-reserve-09.PNG)
-![요금/재고관리 요금수정](images/ota/onda/ota-social-onda-reserve-10.PNG)
-![요금/재고관리 요금수정](images/ota/onda/ota-social-onda-reserve-11.PNG)
-![요금/재고관리 요금수정](images/ota/onda/ota-social-onda-reserve-12.PNG)
+![요금/재고관리 요금수정](images/ota/onda/ota-social-onda-reserve-05.PNG)
 
 1. 요금/재고관리 선택
 2. 재고수량 변경 필요 시 변경
