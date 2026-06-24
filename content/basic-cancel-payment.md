@@ -63,7 +63,7 @@
 
 ![이미지](images/cancel/basic-cancel-linked-27.PNG)
 
-> 이니시스 취소의 경우, 고마스터 예약건 PG주문번호 앞에 "INIPAY" 기재되어 있음
+> ※ 이니시스 취소의 경우, 고마스터 예약건 PG주문번호 앞에 "INIPAY" 기재되어 있음
 
 ![이미지](images/cancel/basic-cancel-linked-28.PNG)
 
