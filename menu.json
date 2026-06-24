@@ -173,6 +173,7 @@
         {
           "title": "해외",
           "items": [
+            { "title": "공통 및 특이사항", "file": "content/ota-overseas-common.md" },
             {
               "title": "아고다",
               "tabs": [
