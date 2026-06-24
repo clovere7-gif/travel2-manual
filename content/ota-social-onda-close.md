@@ -1,6 +1,6 @@
 # 객실마감, 요금수정
 
-## 객실마감
+## 1. 객실마감
 
 ![요금/재고관리 마감 설정](images/ota/onda/ota-social-onda-reserve-04.PNG)
 
@@ -10,7 +10,7 @@
 2. 판매상태 클릭
 3. 판매 마감 버튼 활성화 — 해당 버튼으로 마감/판매 전환
 
-## 요금수정
+## 2. 요금수정
 
 ![요금/재고관리 요금수정](images/ota/onda/ota-social-onda-reserve-05.PNG)
 
