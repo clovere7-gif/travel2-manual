@@ -11,6 +11,7 @@
 
 ![달력 날짜선택 + 블럭수정 팝업](images/ota/tour/ota-tour-tide-reserve-04.PNG)
 
+
 1. 날짜 선택 시 
 2. 객실변경 칸 생성
 
@@ -29,7 +30,8 @@
 
 ![달력 + 수정 팝업 화면](images/ota/tour/ota-tour-tide-reserve-07.PNG)
 
-날짜 선택 시 객실변경 칸 생성
+
+1. 날짜 선택 시 객실변경 칸 생성
 2. 판매가 기준으로 입력
 3. 수정
 4. 저장
