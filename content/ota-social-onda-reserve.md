@@ -2,7 +2,7 @@
 
 # 예약
 
-## 1. 메일 확인
+## 1. 메일확인
 
 ![하이웍스 소셜 메일함](images/ota/onda/ota-social-onda-reserve-01.PNG)
 
