@@ -12,7 +12,7 @@
 
 ![이미지](images/ota/dayapp/ota-dayapp-yanolja-reserve-02.PNG)
 
-## 3. 당일앱 야놀자 호텔, 모텔 예약 하기
+## 3. 야놀자 호텔, 모텔 예약 하기
 
 **CMS(윙스) 연동**
 일반예약건
