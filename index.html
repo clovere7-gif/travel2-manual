@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>여행2팀 야호 업무 매뉴얼</title>
+<title>여행2팀 업무 매뉴얼</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
 :root{
@@ -140,7 +140,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 
 <div class="sidebar">
   <div class="sidebar-header">
-    <div class="hotel-name">여행2팀 야호</div>
+    <div class="hotel-name">여행2팀</div>
     <div class="doc-type">업무 매뉴얼</div>
   </div>
   <div class="sidebar-search">
@@ -618,7 +618,7 @@ function addCopyButtons(){
 function renderHome(){
   document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
   let html = `<div class="breadcrumb">홈</div>`;
-  html += `<div class="page-title">여행2팀 야호 업무 매뉴얼</div>`;
+  html += `<div class="page-title">여행2팀 업무 매뉴얼</div>`;
   html += '<div class="home-grid">';
   MENU.categories.forEach(cat => {
     const count = countItems(cat.items);
