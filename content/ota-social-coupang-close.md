@@ -1,10 +1,6 @@
 # 객실마감, 요금수정
 
-## 1.요금수정
-
-![요금/수량 전체 상품 보기](images/ota/coupang/ota-social-coupang-reserve-06.PNG)
-
-![달력 및 객실 마감 설정](images/ota/coupang/ota-social-coupang-reserve-07.PNG)
+## 1.객실마감
 
 **관리자페이지 순서**
 
@@ -15,23 +11,29 @@
 5. 변경하려는 객실 선택
 6. 판매상태 클릭 변경
 
-## 2. 객실마감
+![요금/수량 전체 상품 보기](images/ota/coupang/ota-social-coupang-reserve-06.PNG)
+
+![달력 및 객실 마감 설정](images/ota/coupang/ota-social-coupang-reserve-07.PNG)
+
+1. 요금/수량 선택
+2. 전체 상품 보기 클릭
+
+## 2. 요금수정
 
 ![요금수정 화면](images/ota/coupang/ota-social-coupang-reserve-08.PNG)
 ![요금수정 화면](images/ota/coupang/ota-social-coupang-reserve-09.PNG)
+
+4. 변경하려는 시설 검색 → 시설 선택
+5. 변경하려는 시설 검색 → 시설 선택
+
 ![요금수정 화면](images/ota/coupang/ota-social-coupang-reserve-10.PNG)
 
-1. 요금/수량 선택
-2. 달력에서 변경하려는 일자 선택
-3. 변경하려는 ①객실 선택
-4. ②재고수량 변경 필요 시 변경
-5. ③판매가 기준으로 변경
+
+- 달력에서 변경하려는 일자 선택
 
 ![요금수정 화면](images/ota/coupang/ota-social-coupang-reserve-11.PNG)
 ![요금수정 화면](images/ota/coupang/ota-social-coupang-reserve-12.PNG)
 
-1. 상동 요금/수량 선택후
-2. 달력>변경하려는 일자 선택
-3. 변경하려는 ①객실 선택 ☑ 
-4. ②재고수량 / 변경필요시 변경
-5. ③판매가 기준으로 변경
+1. 변경하려는 ①객실 선택
+2. 재고수량 변경 필요 시 변경
+3. 판매가 기준으로 변경
