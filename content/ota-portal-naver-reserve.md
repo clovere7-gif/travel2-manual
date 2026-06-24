@@ -43,10 +43,7 @@
 
 ![다연 알림메일 바우처](images/ota/naver/ota-portal-naver-reserve-06.PNG)
 
-
 ## 2. 예약진행
-
-![고마스터 입력 완료화면](images/ota/naver/ota-portal-naver-reserve-07.PNG)
 
 1. 고마스터 → 관리자추천 → 네이버 클릭 후 예약번호 입력, 기본인적사항 기재
 2. 이름 옆에 현장결제, 기타요청사항 혹은 메모에 이용인원 기재
@@ -54,3 +51,6 @@
 4. 결제금액을 판매가 입력가 동일하게 입력
 5. 고마스터 입력완료
 6. 예약완료
+
+![고마스터 입력 완료화면](images/ota/naver/ota-portal-naver-reserve-07.PNG)
+
