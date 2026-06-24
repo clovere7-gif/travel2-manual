@@ -6,7 +6,7 @@
 
 ![하이웍스 소셜 메일함](images/ota/coupang/ota-social-coupang-reserve-01.PNG)
 
-담당메일 로그인 후 개인메일함 **소셜**에서 예약 확인
+메일 로그인 후 개인메일함 **소셜**에서 예약 확인
 
 ## 2. 예약진행
 
