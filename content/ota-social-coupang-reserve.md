@@ -26,7 +26,7 @@
 6. 판매가, 입금가
 7. 대리 구매한 경우 구매자와 투숙자 이름을 같이 기재하여 혼동 없게 할 것
 
-![예약/취소 관리 목록](images/ota/coupang/ota-social-coupang-reserve-04.PNG)
+![예약/취소 관리 목록](images/ota/coupang/ota-social-coupang-reserve-05.PNG)
 
 > 예약 완료 후 상단 **목록으로 돌아가기** 클릭
 
