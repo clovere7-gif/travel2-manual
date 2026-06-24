@@ -28,7 +28,7 @@
 
 ![예약/취소 관리 목록](images/ota/coupang/ota-social-coupang-reserve-04.PNG)
 
-> 예약 완료 후 상단 **목록으로 돌아가기** 클릭
+8. 예약 완료 후 상단 **목록으로 돌아가기** 클릭
 
 ![예약/취소 관리 목록](images/ota/coupang/ota-social-coupang-reserve-05.PNG)
 
