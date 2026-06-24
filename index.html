@@ -81,7 +81,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 /* 목차 */
 .toc{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin-bottom:24px;font-size:0.8rem}
 .toc-title{font-weight:700;margin-bottom:8px;color:var(--text-primary)}
-.toc a{display:block;color:var(--text-secondary);text-decoration:none;padding:3px 0;cursor:pointer}
+.toc a{display:block;color:var(--text-primary);text-decoration:none;padding:3px 0;cursor:pointer}
 .toc a:hover{color:var(--accent-text)}
 
 /* 본문 콘텐츠 */
@@ -92,7 +92,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .content-body h3{font-size:0.95rem;font-weight:700;margin:16px 0 8px}
 .content-body p{font-size:0.9rem;line-height:1.85;color:var(--text-primary);margin-bottom:10px}
 .content-body strong{color:var(--text-primary);font-weight:700}
-.content-body ul,.content-body ol{margin:0 0 12px 1.4rem;font-size:0.9rem;line-height:1.85;color:var(--text-secondary)}
+.content-body ul,.content-body ol{margin:0 0 12px 1.4rem;font-size:0.9rem;line-height:1.85;color:var(--text-primary)}
 .content-body img{max-width:100%;border-radius:6px;border:1px solid var(--border);margin:10px 0}
 .content-body table{width:100%;border-collapse:collapse;font-size:0.85rem;margin:12px 0;border:1px solid var(--border);overflow:hidden;border-radius:var(--radius)}
 .content-body th{background:#f9fafb;color:var(--text-secondary);padding:9px 14px;border-bottom:1px solid var(--border);font-weight:500;text-align:left}
@@ -754,9 +754,20 @@ function mdToHtml(md){
       html += `<li>${inline(line.replace(/^\d+\.\s/, ''))}</li>`;
       continue;
     }
-    flushList();
 
-    if(line.trim() === ''){ continue; }
+    // 빈 줄: 목록 진행 중이면 끊지 않고 유지 (이미지 다음 번호 연속 허용)
+    if(line.trim() === ''){
+      if(!inList) { /* 빈줄 무시 */ }
+      continue;
+    }
+
+    // 이미지 단독 줄: 목록 안에 있으면 li 안에 넣어서 목록 유지
+    if(inList && /^!\[.*?\]\(.*?\)$/.test(line.trim())){
+      html += `<li>${inline(line.trim())}</li>`;
+      continue;
+    }
+
+    flushList();
     html += `<p>${inline(line)}</p>`;
   }
   flushList(); flushTable(); flushQuote();
