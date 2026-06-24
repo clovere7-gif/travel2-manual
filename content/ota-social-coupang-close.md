@@ -2,9 +2,9 @@
 
 ## 1.객실마감
 
-![요금/수량 전체 상품 보기](images/ota/coupang/ota-social-coupang-reserve-05.PNG)
+![요금/수량 전체 상품 보기](images/ota/coupang/ota-social-coupang-reserve-06.PNG)
 
-![달력 및 객실 마감 설정](images/ota/coupang/ota-social-coupang-reserve-06.PNG)
+![달력 및 객실 마감 설정](images/ota/coupang/ota-social-coupang-reserve-07.PNG)
 
 **관리자페이지 순서**
 
@@ -18,7 +18,10 @@
 
 ## 2. 요금수정
 
-![요금수정 화면](images/ota/coupang/ota-social-coupang-reserve-07.PNG)
+![요금수정 화면](images/ota/coupang/ota-social-coupang-reserve-08.PNG)
+![요금수정 화면](images/ota/coupang/ota-social-coupang-reserve-09.PNG)
+![요금수정 화면](images/ota/coupang/ota-social-coupang-reserve-10.PNG)
+![요금수정 화면](images/ota/coupang/ota-social-coupang-reserve-11.PNG)
 
 1. 요금/수량 선택
 2. 달력에서 변경하려는 일자 선택
