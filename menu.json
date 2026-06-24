@@ -47,11 +47,11 @@
       "label": "OTA 업무메뉴얼",
       "color": "#1D9E75",
       "items": [
-        { "title": "공통 및 특이사항", "file": "content/ota-common.md" },
+        { "title": "OTA 공통 및 특이사항", "file": "content/ota-common.md" },
         {
           "title": "당일앱",
           "items": [
-            { "title": "공통 및 특이사항", "file": "content/ota-dayapp-common.md" },
+            { "title": "당일앱 공통 및 특이사항", "file": "content/ota-dayapp-common.md" },
             {
               "title": "야놀자",
               "tabs": [
@@ -109,7 +109,7 @@
         {
           "title": "투어",
           "items": [
-            { "title": "공통 및 특이사항", "file": "content/ota-tour-common.md" },
+            { "title": "여행사 공통 및 특이사항", "file": "content/ota-tour-common.md" },
             {
               "title": "웹투어",
               "tabs": [
@@ -143,7 +143,7 @@
         {
           "title": "자사",
           "tabs": [
-            { "title": "공통 및 특이사항", "file": "content/ota-direct-common.md" },
+            { "title": "자사 공통 및 특이사항", "file": "content/ota-direct-common.md" },
             { "title": "예약하기", "file": "content/ota-direct-reserve.md" },
             { "title": "요금마감", "file": "content/ota-direct-close.md" }
           ]
@@ -151,7 +151,7 @@
         {
           "title": "해외",
           "items": [
-            { "title": "공통 및 특이사항", "file": "content/ota-overseas-common.md" },
+            { "title": "해외 공통 및 특이사항", "file": "content/ota-overseas-common.md" },
             {
               "title": "아고다",
               "tabs": [
@@ -219,7 +219,7 @@
       "label": "리저브클럽",
       "color": "#534AB7",
       "items": [
-        { "title": "기본정보 및 특이사항", "file": "content/reserve-info.md" },
+        { "title": "리저브클럽 기본정보 및 특이사항", "file": "content/reserve-info.md" },
         {
           "title": "예약/취소/요금",
           "tabs": [
@@ -240,7 +240,7 @@
       "label": "홈쇼핑",
       "color": "#D4537E",
       "items": [
-        { "title": "기본정보 및 특이사항", "file": "content/hs-info.md" },
+        { "title": "홈쇼핑 기본정보 및 특이사항", "file": "content/hs-info.md" },
         {
           "title": "예약/취소/요금",
           "tabs": [
