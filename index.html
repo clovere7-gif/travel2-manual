@@ -749,11 +749,15 @@ function mdToHtml(md){
       html += `<li>${inline(line.replace(/^[-*]\s/, ''))}</li>`;
       continue;
     }
-    if(/^\d+\.\s/.test(line)){
-      if(!inList || listType !== 'ol'){ flushList(); html += '<ol>'; inList=true; listType='ol'; }
-      html += `<li>${inline(line.replace(/^\d+\.\s/, ''))}</li>`;
-      continue;
-    }
+    if(/^!\[.*?\]\(.*?\)$/.test(line.trim())){
+  if(inList && listType === 'ol'){
+    html += `</ol>${inline(line.trim())}<ol start="${olCount + 1}">`;
+  } else {
+    flushList();
+    html += `<p>${inline(line.trim())}</p>`;
+  }
+  continue;
+}
 
     // 빈 줄: 목록 진행 중이면 끊지 않고 유지 (이미지 다음 번호 연속 허용)
     if(line.trim() === ''){
