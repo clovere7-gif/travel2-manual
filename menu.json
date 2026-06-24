@@ -144,7 +144,7 @@
           "title": "자사",
           "tabs": [
             { "title": "자사 공통 및 특이사항", "file": "content/ota-direct-common.md" },
-            { "title": "예약하기", "file": "content/ota-direct-reserve.md" },
+            { "title": "업무개요", "file": "content/ota-direct-reserve.md" },
             { "title": "요금마감", "file": "content/ota-direct-close.md" }
           ]
         },
