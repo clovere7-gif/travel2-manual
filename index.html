@@ -94,9 +94,9 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 .content-body strong{color:var(--text-primary);font-weight:700}
 .content-body ul,.content-body ol{margin:0 0 12px 1.4rem;font-size:0.9rem;line-height:1.85;color:var(--text-primary)}
 .content-body img{max-width:100%;border-radius:6px;border:1px solid var(--border);margin:10px 0}
-.content-body table{border-collapse:collapse;font-size:0.85rem;margin:12px 0;border:1px solid var(--border);overflow:hidden;border-radius:var(--radius)}
-.content-body th{background:#f9fafb;color:var(--text-secondary);padding:9px 14px;border-bottom:1px solid var(--border);font-weight:500;text-align:left}
-.content-body td{padding:9px 14px;border-bottom:1px solid var(--border)}
+.content-body table{width:100%;border-collapse:collapse;font-size:0.85rem;margin:12px 0;border:1px solid var(--border);overflow:hidden;border-radius:var(--radius);table-layout:fixed}
+.content-body th{background:#f9fafb;color:var(--text-secondary);padding:9px 14px;border-bottom:1px solid var(--border);font-weight:500;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.content-body td{padding:9px 14px;border-bottom:1px solid var(--border);overflow:hidden;word-break:keep-all;word-wrap:break-word}
 .content-body tr:last-child td{border-bottom:none}
 .content-body tr:hover td{background:#f9fafb}
 .content-body blockquote{background:var(--warning-bg);border:1px solid var(--warning-border);border-radius:var(--radius);padding:12px 16px;margin:12px 0;font-size:0.85rem;color:var(--warning-text);line-height:1.7}
@@ -169,37 +169,34 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 
 <script>
 let MENU = null;
-let FLAT = []; // 검색용 평탄화 인덱스: {title, file, path:[breadcrumb], catColor}
+let FLAT = [];
 let currentFile = null;
 let currentTabs = null;
 let currentTabIndex = 0;
 let currentBreadcrumb = [];
-let isRestoringFromHash = false; // 해시 변경에 의한 라우팅인지 구분 (중복 push 방지)
+let isRestoringFromHash = false;
 
 const FAVORITES_KEY = 'manual_favorites';
 const RECENT_KEY = 'manual_recent';
 let favorites = JSON.parse(localStorageGet(FAVORITES_KEY) || '[]');
 let recent = JSON.parse(localStorageGet(RECENT_KEY) || '[]');
 
-// localStorage 래퍼 (파일:// 환경 등 예외 대비)
 function localStorageGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
 function localStorageSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
 
-// ===== menu.json 로드 =====
 fetch('menu.json')
   .then(r => r.json())
   .then(data => {
     MENU = data;
     buildFlatIndex();
     renderSidebar();
-    routeFromHash(); // 최초 로드 시 현재 URL 해시에 맞는 화면 표시 (없으면 홈)
+    routeFromHash();
   })
   .catch(err => {
     document.getElementById('page').innerHTML =
       '<div class="empty-content"><div class="big">⚠️</div><p>menu.json을 불러올 수 없습니다.<br>GitHub Pages에 올린 후 접속하면 정상 작동합니다.<br>(로컬에서 더블클릭으로 열면 보안정책상 작동하지 않습니다)</p></div>';
   });
 
-// ===== 평탄화 인덱스 (검색용) =====
 function buildFlatIndex(){
   FLAT = [];
   MENU.categories.forEach(cat => {
@@ -222,7 +219,6 @@ function walkItems(items, path, color, idPath){
   });
 }
 
-// ===== 사이드바 렌더링 =====
 function renderSidebar(filter){
   const panel = document.getElementById('panel-all');
   panel.innerHTML = '';
@@ -274,7 +270,6 @@ function renderItemList(container, items, path, color, depth){
   items.forEach(item => {
     const newPath = [...path, item.title];
     if(item.items){
-      // 서브폴더
       const sub = document.createElement('div');
       sub.className = 'subfolder';
       const sid = 'sf-' + Math.random().toString(36).slice(2,8);
@@ -291,7 +286,6 @@ function renderItemList(container, items, path, color, depth){
       sub.appendChild(subItems);
       container.appendChild(sub);
     } else if(item.tabs){
-      // 탭이 있는 항목 -> 클릭시 첫 탭
       const navItem = makeNavItem(item.title, newPath, color, () => openTabPage(item.title, item.tabs, newPath, color), depth);
       container.appendChild(navItem);
     } else if(item.file){
@@ -314,13 +308,11 @@ function makeNavItem(title, path, color, onClick, depth){
   return el;
 }
 
-// ===== 즐겨찾기 =====
 function toggleFavorite(key, title, path, color, onClick){
   const idx = favorites.indexOf(key);
   if(idx >= 0){ favorites.splice(idx,1); }
   else { favorites.push(key); }
   localStorageSet(FAVORITES_KEY, JSON.stringify(favorites));
-  // 갱신
   document.querySelectorAll(`.nav-item[data-key="${CSS.escape(key)}"] .star`).forEach(s => s.classList.toggle('filled'));
   renderFavorites();
 }
@@ -380,7 +372,6 @@ function addRecent(key){
   renderRecent();
 }
 
-// 사이드바 탭 전환
 document.querySelectorAll('.sidebar-tab').forEach(tab => {
   tab.onclick = () => {
     document.querySelectorAll('.sidebar-tab').forEach(t => t.classList.remove('active'));
@@ -390,12 +381,10 @@ document.querySelectorAll('.sidebar-tab').forEach(tab => {
   };
 });
 
-// 사이드바 검색
 document.getElementById('sidebarSearch').addEventListener('input', function(){
   renderSidebar(this.value.trim() || null);
 });
 
-// ===== 글자 크기 =====
 let fontScale = parseFloat(localStorageGet('font_scale')) || 1;
 document.documentElement.style.setProperty('--font-scale', fontScale);
 function changeFont(dir){
@@ -404,15 +393,6 @@ function changeFont(dir){
   document.documentElement.style.setProperty('--font-scale', fontScale);
   localStorageSet('font_scale', fontScale);
 }
-
-// ========================================================================
-// ===== URL 해시 라우팅 (새로고침 시 현재 페이지 유지 + 브레드크럼 이동) =====
-// ========================================================================
-// 해시 형식
-//   #home                                  → 홈
-//   #cat/{catId}                           → 카테고리 목록 페이지
-//   #item/{catId}/{idPath...}              → file 또는 tabs 항목 (idPath는 title 경로를 URL 인코딩하여 / 로 연결)
-//   #item/{catId}/{idPath...}?tab={index}  → 탭 항목의 특정 탭
 
 function encodeIdPath(idPath){
   return idPath.map(s => encodeURIComponent(s)).join('/');
@@ -426,12 +406,11 @@ function setHash(hash){
   if(location.hash !== hash){
     location.hash = hash;
   }
-  // setTimeout으로 플래그 해제: hashchange 이벤트가 비동기로 뒤따라오므로
   setTimeout(() => { isRestoringFromHash = false; }, 0);
 }
 
 window.addEventListener('hashchange', function(){
-  if(isRestoringFromHash) return; // 코드가 직접 바꾼 해시는 무시 (중복 라우팅 방지)
+  if(isRestoringFromHash) return;
   routeFromHash();
 });
 
@@ -454,8 +433,6 @@ function routeFromHash(){
     const idPath = decodeIdPath(pathPart);
     const catId = idPath[0];
     const titlePath = idPath.slice(1);
-    const fullKey = titlePath; // FLAT의 path는 [catLabel, ...titles] 이므로 title 매칭 필요
-    // FLAT에서 catId + title 경로(마지막 title)로 항목 찾기
     const found = FLAT.find(f => f.catId === catId && f.idPath.slice(1).join('>') === titlePath.join('>'));
     if(found){
       let tabIndex = 0;
@@ -476,15 +453,12 @@ function routeFromHash(){
   renderHome();
 }
 
-// ===== 페이지 렌더링 =====
 function setActiveNav(key){
   document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
   document.querySelectorAll(`.nav-item[data-key="${CSS.escape(key)}"]`).forEach(el => el.classList.add('active'));
 }
 
 function renderBreadcrumb(path, idPath, catId){
-  // path: ["기초/입문", "프로그램 기본", "고마스터"] 같은 표시용 타이틀 배열
-  // idPath: catId를 포함한 FLAT idPath (없으면 카테고리만 있는 경우)
   let html = `<span data-crumb onclick="goHome()">홈</span>`;
   path.forEach((p, i) => {
     html += `<span style="color:var(--border)">›</span>`;
@@ -492,11 +466,8 @@ function renderBreadcrumb(path, idPath, catId){
     if(isLast){
       html += `<span>${p}</span>`;
     } else if(i === 0 && catId){
-      // 첫 번째 크럼 = 카테고리 라벨 → 카테고리 페이지로 이동
       html += `<span data-crumb onclick="openCategoryPage('${catId}')">${p}</span>`;
     } else {
-      // 중간 단계(서브폴더) 클릭 시: 해당 path까지의 항목들이 모여있는 카테고리 페이지로 이동
-      // (서브폴더 자체를 펼치는 페이지가 없으므로, 가장 가까운 상위인 카테고리 페이지로 이동시킴)
       html += `<span data-crumb onclick="openCategoryPage('${catId}')">${p}</span>`;
     }
   });
@@ -542,7 +513,6 @@ function openTabPage(title, tabs, path, color, tabIndex, fromHash){
 
 function loadTab(title, path, tabIndex, catId){
   const tab = currentTabs[tabIndex];
-  // 탭 전환 시에도 해시의 tab 파라미터 갱신
   const key = path.join(' > ');
   const flatItem = FLAT.find(f => f.path.join(' > ') === key);
   const cid = catId || (flatItem ? flatItem.catId : null);
@@ -584,13 +554,6 @@ function renderPageShell(title, path, bodyHtml, tabs, tabIndex, catId){
 }
 
 // ===== 목차 생성 =====
-function applyTableLayout(){
-  document.querySelectorAll('#contentBody table').forEach(table => {
-    table.style.tableLayout = 'fixed';
-    table.querySelectorAll('th:first-child, td:first-child').forEach(el => el.style.width = '150px');
-    table.querySelectorAll('th:nth-child(2), td:nth-child(2)').forEach(el => el.style.width = '100px');
-  });
-}
 function buildToc(){
   const body = document.getElementById('contentBody');
   const headers = body.querySelectorAll('h2');
@@ -637,7 +600,8 @@ function renderHome(){
   html += '</div>';
   document.getElementById('page').innerHTML = html;
 }
-  function openCategoryPage(catId, fromHash){
+
+function openCategoryPage(catId, fromHash){
   const cat = MENU.categories.find(c => c.id === catId);
   document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
   if(!fromHash){
@@ -681,9 +645,7 @@ function countItems(items){
   return c;
 }
 
-// ===== 검색 결과를 본문에서도 (sidebar search 외 추가 기능 없음, sidebar로 충분) =====
-
-// ===== 간단 마크다운 -> HTML 변환기 =====
+// ===== 마크다운 -> HTML 변환기 =====
 function mdToHtml(md){
   let lines = md.split('\n');
   let html = '';
@@ -694,28 +656,44 @@ function mdToHtml(md){
   let inQuote = false, quoteBuf = [];
 
   function flushList(){ if(inList){ html += '</'+listType+'>'; inList=false; olCount=0; } }
+
   function flushTable(){
-  if(inTable){
-    const colCount = tableHeader.length;
-    let colgroup = '<colgroup>';
-    for(let i=0;i<colCount;i++){
-      if(i===0) colgroup += '<col style="width:150px">';
-      else if(i===1) colgroup += '<col style="width:100px">';
-      else colgroup += '<col>';
+    if(inTable){
+      const colCount = Math.max(tableHeader.length, 4);
+      // 4열 기준 고정: 1열 180px, 2열 150px, 3열 200px, 4열 auto
+      let colgroup = '<colgroup>';
+      for(let i = 0; i < colCount; i++){
+        if(i === 0) colgroup += '<col style="width:180px">';
+        else if(i === 1) colgroup += '<col style="width:150px">';
+        else if(i === 2) colgroup += '<col style="width:200px">';
+        else colgroup += '<col>';
+      }
+      colgroup += '</colgroup>';
+
+      // 헤더 4열 미만이면 "비고"로 채움
+      const paddedHeader = [...tableHeader];
+      while(paddedHeader.length < 4) paddedHeader.push('비고');
+
+      html += '<table>' + colgroup + '<thead><tr>' + paddedHeader.map(h=>`<th>${inline(h)}</th>`).join('') + '</tr></thead><tbody>';
+
+      tableRows.forEach(r => {
+        const paddedRow = [...r];
+        while(paddedRow.length < 4) paddedRow.push('');
+        html += '<tr>' + paddedRow.map(c=>`<td>${inline(c)}</td>`).join('') + '</tr>';
+      });
+
+      html += '</tbody></table>';
+      inTable = false; tableHeader=[]; tableRows=[];
     }
-    colgroup += '</colgroup>';
-    html += '<table style="table-layout:fixed;width:100%">' + colgroup + '<thead><tr>' + tableHeader.map(h=>`<th>${inline(h)}</th>`).join('') + '</tr></thead><tbody>';
-    tableRows.forEach(r => { html += '<tr>' + r.map(c=>`<td>${inline(c)}</td>`).join('') + '</tr>'; });
-    html += '</tbody></table>';
-    inTable = false; tableHeader=[]; tableRows=[];
   }
-}
+
   function flushQuote(){
     if(inQuote){
       html += '<blockquote>' + quoteBuf.map(l=>`<p>${inline(l)}</p>`).join('') + '</blockquote>';
       inQuote = false; quoteBuf=[];
     }
   }
+
   function inline(text){
     text = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
