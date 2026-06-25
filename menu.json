@@ -205,10 +205,7 @@
         {
           "title": "에어비앤비",
           "tabs": [
-            { "title": "기본정보", "file": "content/ota-airbnb-info.md" },
-            { "title": "예약하기", "file": "content/ota-airbnb-reserve.md" },
-            { "title": "취소하기", "file": "content/ota-airbnb-cancel.md" },
-            { "title": "요금마감", "file": "content/ota-airbnb-close.md" }
+            { "title": "업무개요", "file": "content/ota-airbnb-info.md" },
           ]
         }
       ]
