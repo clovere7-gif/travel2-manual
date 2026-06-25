@@ -583,9 +583,20 @@ function renderPageShell(title, path, bodyHtml, tabs, tabIndex, catId){
 
   buildToc();
   addCopyButtons();
+  applyTableLayout();
 }
 
 // ===== 목차 생성 =====
+function applyTableLayout(){
+  document.querySelectorAll('#contentBody table').forEach(table => {
+    const cols = table.querySelector('tr') ? table.querySelector('tr').children.length : 0;
+    table.style.tableLayout = 'fixed';
+    table.querySelectorAll('th:first-child, td:first-child').forEach(el => el.style.width = '150px');
+    if(cols >= 3){
+      table.querySelectorAll('th:nth-child(2), td:nth-child(2)').forEach(el => el.style.width = '100px');
+    }
+  });
+}
 function buildToc(){
   const body = document.getElementById('contentBody');
   const headers = body.querySelectorAll('h2');
