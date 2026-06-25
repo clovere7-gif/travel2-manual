@@ -224,10 +224,10 @@
             { "title": "요금마감", "file": "content/reserve-close.md" }
           ]
         },
-        { "title": "이용방법", "file": "content/reserve-howto.md" },
-        { "title": "문의답변", "file": "content/reserve-qna.md" },
+        { "title": "기본정보", "file": "content/reserve-howto.md" },
         { "title": "카톡발송", "file": "content/reserve-kakao.md" },
         { "title": "구매방법", "file": "content/reserve-purchase.md" },
+        { "title": "리저브 이용", "file": "content/reserve-qna.md" },
         { "title": "스마트스토어", "file": "content/reserve-smartstore.md" }
       ]
     },
