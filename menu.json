@@ -205,7 +205,7 @@
         {
           "title": "에어비앤비",
           "tabs": [
-            { "title": "업무개요", "file": "content/ota-airbnb-info.md" },
+            { "title": "업무개요", "file": "content/ota-airbnb-info.md" }
           ]
         }
       ]
