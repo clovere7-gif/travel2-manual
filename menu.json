@@ -256,36 +256,31 @@
         {
           "title": "아르누보",
           "tabs": [
-            { "title": "기본정보", "file": "content/facility-arnouveau-info.md" },
-            { "title": "객실정보", "file": "content/facility-arnouveau-room.md" }
+            { "title": "아르누보 기본정보", "file": "content/facility-arnouveau-info.md" }
           ]
         },
         {
           "title": "스테이모어",
           "tabs": [
-            { "title": "기본정보", "file": "content/facility-staymore-info.md" },
-            { "title": "객실정보", "file": "content/facility-staymore-room.md" }
+            { "title": "스테이모어 기본정보", "file": "content/facility-staymore-info.md" }
           ]
         },
         {
           "title": "오션투유",
           "tabs": [
-            { "title": "기본정보", "file": "content/facility-ocean2u-info.md" },
-            { "title": "객실정보", "file": "content/facility-ocean2u-room.md" }
+            { "title": "오션투유 기본정보", "file": "content/facility-ocean2u-info.md" }
           ]
         },
         {
           "title": "아이파크",
           "tabs": [
-            { "title": "기본정보", "file": "content/facility-ipark-info.md" },
-            { "title": "객실정보", "file": "content/facility-ipark-room.md" }
+            { "title": "아이파크 기본정보", "file": "content/facility-ipark-info.md" }
           ]
         },
         {
           "title": "마리비스타",
           "tabs": [
-            { "title": "기본정보", "file": "content/facility-maribista-info.md" },
-            { "title": "객실정보", "file": "content/facility-maribista-room.md" }
+            { "title": "마리비스타 기본정보", "file": "content/facility-maribista-info.md" }
           ]
         }
       ]
