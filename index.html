@@ -660,11 +660,11 @@ function mdToHtml(md){
   function flushTable(){
     if(inTable){
       const colCount = Math.max(tableHeader.length, 4);
-      // 4열 기준 고정: 1열 180px, 2열 150px, 3열 200px, 4열 auto
+      // 4열 기준 고정: 1열 180px, 2열 150px, 3열 300px, 4열 auto
       let colgroup = '<colgroup>';
       for(let i = 0; i < colCount; i++){
         if(i === 0) colgroup += '<col style="width:180px">';
-        else if(i === 1) colgroup += '<col style="width:150px">';
+        else if(i === 1) colgroup += '<col style="width:400px">';
         else if(i === 2) colgroup += '<col style="width:200px">';
         else colgroup += '<col>';
       }
