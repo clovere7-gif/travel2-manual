@@ -228,9 +228,14 @@
         { "title": "카톡발송", "file": "content/reserve-kakao.md" },
         { "title": "구매방법", "file": "content/reserve-purchase.md" },
         { "title": "리저브 이용", "file": "content/reserve-qna.md" },
-        { "title": "스마트스토어", "file": "content/reserve-smartstore.md" }
-      ]
-    },
+        {
+          "title": "스마트스토어",
+          "tabs": [
+            { "title": "구매", "file": "content/reserve-smartstore-purchase.md" },
+            { "title": "취소", "file": "content/reserve-smartstore-cancel.md" },
+            { "title": "고객화면", "file": "content/reserve-smartstore-customer.md" }
+          ]
+        },
     {
       "id": "homeshopping",
       "label": "홈쇼핑",
