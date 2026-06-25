@@ -698,12 +698,21 @@ function mdToHtml(md){
 
   function flushList(){ if(inList){ html += '</'+listType+'>'; inList=false; olCount=0; } }
   function flushTable(){
-    if(inTable){
-      html += '<table><thead><tr>' + tableHeader.map(h=>`<th>${inline(h)}</th>`).join('') + '</tr></thead><tbody>';
-      tableRows.forEach(r => { html += '<tr>' + r.map(c=>`<td>${inline(c)}</td>`).join('') + '</tr>'; });
-      html += '</tbody></table>';
-      inTable = false; tableHeader=[]; tableRows=[];
+  if(inTable){
+    const colCount = tableHeader.length;
+    let colgroup = '<colgroup>';
+    for(let i=0;i<colCount;i++){
+      if(i===0) colgroup += '<col style="width:150px">';
+      else if(i===1) colgroup += '<col style="width:100px">';
+      else colgroup += '<col>';
     }
+    colgroup += '</colgroup>';
+    html += '<table style="table-layout:fixed;width:100%">' + colgroup + '<thead><tr>' + tableHeader.map(h=>`<th>${inline(h)}</th>`).join('') + '</tr></thead><tbody>';
+    tableRows.forEach(r => { html += '<tr>' + r.map(c=>`<td>${inline(c)}</td>`).join('') + '</tr>'; });
+    html += '</tbody></table>';
+    inTable = false; tableHeader=[]; tableRows=[];
+  }
+}
   }
   function flushQuote(){
     if(inQuote){
