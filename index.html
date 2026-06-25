@@ -713,7 +713,6 @@ function mdToHtml(md){
     inTable = false; tableHeader=[]; tableRows=[];
   }
 }
-  }
   function flushQuote(){
     if(inQuote){
       html += '<blockquote>' + quoteBuf.map(l=>`<p>${inline(l)}</p>`).join('') + '</blockquote>';
